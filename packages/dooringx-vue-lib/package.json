@@ -1,0 +1,29 @@
+{
+  "name": "dooringx-vue-lib",
+  "version": "0.1.3",
+  "description": "> TODO: description",
+  "keywords": [
+    "dooringx-vue-lib"
+  ],
+  "author": "geekqiaqia <xiyangbai@outlook.com>",
+  "homepage": "https://github.com/GeekQiaQia/dooringx-vue#readme",
+  "license": "ISC",
+  "main": "lib/dooringx-vue-lib.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeekQiaQia/dooringx-vue.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/GeekQiaQia/dooringx-vue/issues"
+  }
+}
