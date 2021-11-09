@@ -10,7 +10,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint --ext .js  packages/**/*.js --no-error-on-unmatched-pattern --fix",
-    "start:example": "lerna exec yarn run dev --scope=dooringx-example-vue3.0"
+    "start:example": "lerna exec yarn run dev --scope=dooringx-example-vue3.0",
+    "build": "lerna exec yarn run build --scope=dooringx-example-vue3.0"
 
   }
 }
