@@ -4,7 +4,7 @@ name: CI
 # 监听 master上的push事件
 on:
   push:
-    branches: [ test main]
+    branches: [main]
 ​
 # 开始任务
 jobs:
