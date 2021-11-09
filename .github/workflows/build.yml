@@ -1,36 +1,27 @@
-
-name: CI # 建立一个名为CI的工作流
-​
-
-on: [ push ]
-
-​
-# 开始任务
+name: build
+on: [push]
 jobs:
-  
-  build: # 建立一个名为 build 的job
-    
-    runs-on: ubuntu-latest # 在最新的乌班图环境进行工作
-​
-    # 开始设置构建步骤
-    steps:
-    
-    - uses: actions/checkout@v2  # 这是github官方的一个action，用于clone该仓库的源码到工作流中，
-​
-    - name: Build   # 命名这个步骤为构建Build
-      
-      run: npm install && npm run build  # 运行 安装和打包任务
-​
-    - name: Deploy # 命名这个任务为发布Deploy
-     
-      uses: cross-the-world/scp-pipeline@master   # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
-      env:
-        WELCOME: "ssh scp ssh pipelines"
-        LASTSSH: "Doing something after copying"
-      with:
-        host: ${{ secrets.DR_HOST }}
-        user: ${{ secrets.DR_USER }}
-        pass: ${{ secrets.DR_PASS }}
-        connect_timeout: 10s
-        local: './dist/*'
-        remote: /usr/local/webserver/nginx/html
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          npm install
+          npm run build
+      - name: Deploy 🚀
+        uses: cross-the-world/scp-pipeline@main # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
+        env:
+          WELCOME: "ssh scp ssh pipelines"
+          LASTSSH: "Doing something after copying"
+        with:
+         host: ${{ secrets.DR_HOST }}
+         user: ${{ secrets.DR_USER }}
+         pass: ${{ secrets.DR_PASS }}
+         connect_timeout: 10s
+         local: './dist/*'
+         remote: /usr/local/webserver/nginx/html
