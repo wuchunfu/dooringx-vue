@@ -4,7 +4,7 @@ name: CI # 建立一个名为CI的工作流
 
 on:  # 监听 master上的push事件
   push: 
-    branches: [main]
+    branches: [ main ]
 ​
 # 开始任务
 jobs:
