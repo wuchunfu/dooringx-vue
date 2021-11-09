@@ -8,25 +8,23 @@ on:
 ​
 # 开始任务
 jobs:
-  # 建立一个名为 build 的job
-  build:
-    # 在最新的乌班图环境进行工作
-    runs-on: ubuntu-latest
+  
+  build: # 建立一个名为 build 的job
+    
+    runs-on: ubuntu-latest # 在最新的乌班图环境进行工作
 ​
     # 开始设置构建步骤
     steps:
-    # 这是github官方的一个action，用于clone该仓库的源码到工作流中，
-    - uses: actions/checkout@v2
+    
+    - uses: actions/checkout@v2  # 这是github官方的一个action，用于clone该仓库的源码到工作流中，
 ​
-    # 命名这个步骤为构建Build
-    - name: Build
-      // 运行 安装和打包任务
-      run: npm install && npm run build
+    - name: Build   # 命名这个步骤为构建Build
+      
+      run: npm install && npm run build  # 运行 安装和打包任务
 ​
-    # 命名这个任务为发布Deploy
-    - name: Deploy
-      # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
-      uses: cross-the-world/scp-pipeline@master
+    - name: Deploy # 命名这个任务为发布Deploy
+     
+      uses: cross-the-world/scp-pipeline@master   # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
       env:
         WELCOME: "ssh scp ssh pipelines"
         LASTSSH: "Doing something after copying"
@@ -37,4 +35,3 @@ jobs:
         connect_timeout: 10s
         local: './dist/*'
         remote: /usr/local/webserver/nginx/html
-        
