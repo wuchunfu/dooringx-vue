@@ -14,7 +14,7 @@ jobs:
           npm install
           npm run build
       - name: Deploy 🚀
-        uses: cross-the-world/scp-pipeline@main # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
+        uses: cross-the-world/scp-pipeline@master # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
         env:
           WELCOME: "ssh scp ssh pipelines"
           LASTSSH: "Doing something after copying"
