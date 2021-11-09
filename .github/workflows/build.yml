@@ -2,7 +2,8 @@
 name: CI # 建立一个名为CI的工作流
 ​
 
-on: [push]
+on: [ push ]
+
 ​
 # 开始任务
 jobs:
