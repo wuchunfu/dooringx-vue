@@ -27,7 +27,11 @@ jobs:
          pass: ${{ secrets.DR_PASS }}
          port: ${{ secrets.DR_PORT }}
          connect_timeout: 10s
+         first_ssh: |
+            rm -rf /usr/local/webserver/nginx/test
+            ls -la  \necho $WELCOME 
+            mkdir -p /usr/local/webserver/nginx/test
          scp: |
-           './packages/dooringx-example-vue3.0/dist/*' => /usr/local/webserver/nginx/
+           './packages/dooringx-example-vue3.0/dist/*' => /usr/local/webserver/nginx/test
         #  src: './dist/*'
         #  remote: /usr/local/webserver/nginx/html
