@@ -31,4 +31,4 @@ jobs:
             rm -rf /usr/local/webserver/nginx/vue_editor
             mkdir -p /usr/local/webserver/nginx/vue_editor
          scp: |
-           './packages/dooringx-example-vue3.0/dist/*' => /usr/local/webserver/nginx/html
+           './packages/dooringx-example-vue3.0/dist/*' => /usr/local/webserver/nginx/html/vue_editor
