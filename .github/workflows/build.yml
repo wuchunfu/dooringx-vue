@@ -17,14 +17,17 @@ jobs:
           lerna bootstrap
           lerna run build
       - name: Deploy 🚀
-        uses: appleboy/scp-action@master # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
         env:
           WELCOME: "ssh scp ssh pipelines"
           LASTSSH: "Doing something after copying"
         with:
          host: ${{ secrets.DR_HOST }}
-         username: ${{ secrets.DR_USER }}
-         password: ${{ secrets.DR_PASS }}
+         user: ${{ secrets.DR_USER }}
+         pass: ${{ secrets.DR_PASS }}
          port: ${{ secrets.DR_PORT }}
-         source: './dist/*'
-         target: /usr/local/webserver/nginx/html
+         connect_timeout: 10s
+         scp: |
+           './dist/*' => /usr/local/webserver/nginx/html
+        #  src: './dist/*'
+        #  remote: /usr/local/webserver/nginx/html
