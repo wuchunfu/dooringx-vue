@@ -25,5 +25,8 @@
   },
   "bugs": {
     "url": "https://github.com/GeekQiaQia/dooringx-vue/issues"
+  },
+  "dependencies": {
+    "cz-customizable": "^6.3.0"
   }
 }
