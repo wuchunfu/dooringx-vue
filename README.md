@@ -31,6 +31,8 @@ dooringx-lib 在运行时维护一套数据流，主要分为json数据部分，
 ## 使用到的插件/库 | Plugin or lib
 🎨 [Windi CSS - next generation utility-first CSS framework](https://windicss.org/features/)
 
+📦 Components auto importing
+
 
 ## 文档 | Doc
 
