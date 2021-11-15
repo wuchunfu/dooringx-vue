@@ -1,8 +1,6 @@
 import { InjectionKey } from '@vue/runtime-core';
 import { createStore, Store, useStore as baseUseStore } from 'vuex';
 
-import settingsModule from './modules/Setting/index';
-import appModule from './modules/app/index';
 import RootStateTypes, { AllStateTypes } from './types';
 
 const defaultState = {
@@ -30,8 +28,6 @@ export const store = createStore({
     },
   },
   modules: {
-    settingsModule,
-    appModule
   },
 });
 

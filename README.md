@@ -28,6 +28,11 @@ dooringx-lib 在运行时维护一套数据流，主要分为json数据部分，
 
 其除了提供基础的拖拽、移动、缩放、全选、旋转等功能外，还可以使用暴露的组件。如果觉得组件不够定制化，可以调整样式或者自己重新写。
 
+## 使用到的插件/库 | Plugin or lib
+
+[windicss 样式库](https://windicss.org/features/)/
+[windicss 与vite 集成](https://windicss.org/integrations/vite.html)
+
 ## 文档 | Doc
 
 [Read the Docs to Learn More](https://github.com/H5-Dooring/dooringx-vue).

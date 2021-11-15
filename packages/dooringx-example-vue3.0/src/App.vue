@@ -1,5 +1,5 @@
 <template>
-  <el-config-provider :locale="locale">
+  <el-config-provider :locale="'/zh-CN'">
     <div id="app">
       <router-view></router-view>
     </div>
@@ -11,7 +11,7 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 
 import { defineComponent, computed } from 'vue'
-import { useStore } from './store/index'
+// import { useStore } from './store/index'
 import { ElConfigProvider } from 'element-plus'
 import zhLocale from 'element-plus/lib/locale/lang/zh-cn'
 import enLocale from 'element-plus/lib/locale/lang/en'
@@ -22,15 +22,15 @@ export default defineComponent({
     ElConfigProvider
   },
   setup() {
-    const store = useStore()
+    // const store = useStore()
 
-    const locale = computed(() => {
-      const langState = store.getters['settingsModule/getLangState']
-      const local = langState === '/zh-CN' ? zhLocale : enLocale
-      return local
-    })
+    // const locale = computed(() => {
+    //   const langState = store.getters['settingsModule/getLangState']
+    //   const local = langState === '/zh-CN' ? zhLocale : enLocale
+    //   return local
+    // })
     return {
-      locale
+      // locale
     }
   }
 })
@@ -44,6 +44,5 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

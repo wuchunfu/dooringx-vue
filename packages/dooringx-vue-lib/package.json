@@ -28,5 +28,8 @@
   },
   "dependencies": {
     "cz-customizable": "^6.3.0"
+  },
+  "devDependencies": {
+    "cz-customizable": "^6.3.0"
   }
 }

@@ -1,9 +1,14 @@
 import { defineConfig ,ConfigEnv,UserConfig,loadEnv} from 'vite';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import { resolve } from 'path';
 import styleImport from 'vite-plugin-style-import'
-
+// vite.config.ts
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// windicss
+import WindiCSS from 'vite-plugin-windicss'
 const CWD = process.cwd()
 
 
@@ -21,23 +26,14 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     },
     plugins: [           // 类型： (Plugin | Plugin[])[]  将要用到的插件数组
       vue(),
-      styleImport({
-        libs: [{
-          libraryName: 'element-plus',
-          esModule: true,
-          ensureStyleFile: true,
-          resolveStyle: (name) => {
-            // eslint-disable-next-line no-param-reassign
-            name = name.slice(3)
-            return `element-plus/packages/theme-chalk/src/${name}.scss`;
-          },
-          resolveComponent: (name) => `element-plus/lib/${name}`,
-        }]
-      }),
+      vueJsx(),
+      WindiCSS(),
       legacy({
-        targets: ['ie >= 11'],
-        additionalLegacyPolyfills: ['regenerator-runtime/runtime']
-      })
+        targets: ['defaults', 'not IE 11']
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
     ],
     resolve: {          // 类型：Record<string, string> | Array<{ find: string | RegExp, replacement: string }> 将会被传递到 @rollup/plugin-alias 作为它的 entries。
       alias: {
@@ -49,7 +45,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     clearScreen: false,
     server: {
       hmr: { overlay: false }, // 禁用或配置 HMR 连接 设置 server.hmr.overlay 为 false 可以禁用服务器错误遮罩层
-  
+
       // 服务配置
       port: 4399,    // 类型： number 指定服务器端口;
       open: true,   // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
@@ -77,6 +73,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         'element-plus/lib/locale/lang/zh-cn',
         'element-plus/lib/locale/lang/en'
       ]
+
     },
   }
 }
