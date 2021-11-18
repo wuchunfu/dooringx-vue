@@ -491,7 +491,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
-"@popperjs/core@^2.10.2":
+"@popperjs/core@^2.10.2", "@popperjs/core@^2.9.2":
   "integrity" "sha512-IXf3XA7+XyN7CP9gGh/XB0UxVMlvARGEgGXLubFICsUMGz6Q+DU+i4gGlpOxTjKvXjkJDJC8YdqdKkDj9qZHEQ=="
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.10.2.tgz"
   "version" "2.10.2"
@@ -508,6 +508,11 @@
   "integrity" "sha512-GDVwSzwBm4OdQajFCit2UMxskZVcOhs/hYeOvzVW1R+iW6ZOVIBgD+RSrYCtPT0pNBnwNgRaoPPKfoXcwDo+hg=="
   "resolved" "https://registry.npmjs.org/@types/js-cookie/-/js-cookie-3.0.0.tgz"
   "version" "3.0.0"
+
+"@types/lodash@^4.14.177":
+  "integrity" "sha512-0fDwydE2clKe9MNfvXHBHF9WEahRuj+msTuQqOmAApNORFvhMYZKNGGJdCzuhheVjMps/ti0Ak/iJPACMaevvw=="
+  "resolved" "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.177.tgz"
+  "version" "4.14.177"
 
 "@types/minimist@^1.2.0":
   "integrity" "sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ=="
@@ -538,6 +543,30 @@
   "integrity" "sha512-5eQEtSCoESnh2FsiLTxE121IiE60hnMqcb435fShf4bpLRjEu1Eoekht23y6zXS9Ts3l+Szu3TARnTsA0GkOkQ=="
   "resolved" "https://registry.npmjs.org/@types/throttle-debounce/-/throttle-debounce-2.1.0.tgz"
   "version" "2.1.0"
+
+"@vant/icons@^1.7.1":
+  "integrity" "sha512-66LPEq89w4kl258nALZcRNd14eUJC8VajvTJwvZKOaZawz6CUeVZ6ybhedTUhQhRjeA8SyWD7dFt4ALf33Sabw=="
+  "resolved" "https://registry.npmjs.org/@vant/icons/-/icons-1.7.1.tgz"
+  "version" "1.7.1"
+
+"@vant/lazyload@^1.4.0":
+  "integrity" "sha512-KCbo+jZYPFGIlSip3FLbegdx3h+4e2tTamyO02o2eckUiCaCgaHO5bEX/sWcDm+jEZFT02PRW3Z3LRFSRxh5rw=="
+  "resolved" "https://registry.npmjs.org/@vant/lazyload/-/lazyload-1.4.0.tgz"
+  "version" "1.4.0"
+  dependencies:
+    "@vant/use" "^1.3.2"
+
+"@vant/popperjs@^1.1.0":
+  "integrity" "sha512-8MD1gz146awV/uPxYjz4pet22f7a9YVKqk7T+gFkWFwT9mEcrIUEg/xPrdOnWKLP9puXyYtm7oVfSDSefZ/p/w=="
+  "resolved" "https://registry.npmjs.org/@vant/popperjs/-/popperjs-1.1.0.tgz"
+  "version" "1.1.0"
+  dependencies:
+    "@popperjs/core" "^2.9.2"
+
+"@vant/use@^1.3.2":
+  "integrity" "sha512-EM06Wgc+2sy4VhAECBTRd4NuoUdVeprcfClMdAnS1HNibk13XYd8iGNi8XqijWzrIO/KCCgudnDW9Ja/iYy+rA=="
+  "resolved" "https://registry.npmjs.org/@vant/use/-/use-1.3.3.tgz"
+  "version" "1.3.3"
 
 "@vitejs/plugin-legacy@^1.6.2":
   "integrity" "sha512-p5Bv/827WUpVN2m95ZYXzmjE3AblFE4CHasVoZ7dIwOPlyNcpg70SehEi5AWqyC0E7C1rHD8Nju9rWoV9uBLiw=="
@@ -3690,6 +3719,16 @@
   dependencies:
     "spdx-correct" "^3.0.0"
     "spdx-expression-parse" "^3.0.0"
+
+"vant@^3.2.8":
+  "integrity" "sha512-Nwdi+isviRoMjQlmSOC7eqZiWNZReSrrEv1eQzs8mbmW+gvhCr6H7DpRdLzIqLq9+uONfTIRofErMgfLKlXfSg=="
+  "resolved" "https://registry.npmjs.org/vant/-/vant-3.2.8.tgz"
+  "version" "3.2.8"
+  dependencies:
+    "@vant/icons" "^1.7.1"
+    "@vant/lazyload" "^1.4.0"
+    "@vant/popperjs" "^1.1.0"
+    "@vant/use" "^1.3.2"
 
 "vite-plugin-style-import@^1.3.0":
   "integrity" "sha512-R3bEQcdhPqL+5CZiMXs9RGKwbBtIHBJmh7ngND3sJjCYbkBe6DGEL6DWGBS7xTaqfH+1mXRfX8lEK0W3PjQSzA=="

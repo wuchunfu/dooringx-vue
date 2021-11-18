@@ -1,15 +1,25 @@
+/*
+ * @Author: GeekQiaQia
+ * @Date: 2021-11-09 16:07:18
+ * @LastEditTime: 2021-11-17 15:13:03
+ * @LastEditors: GeekQiaQia
+ * @Description:
+ * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/vite.config.ts
+ */
 import { defineConfig ,ConfigEnv,UserConfig,loadEnv} from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import { resolve } from 'path';
-import styleImport from 'vite-plugin-style-import'
 // vite.config.ts
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // windicss
 import WindiCSS from 'vite-plugin-windicss'
+// vant
+import styleImport from 'vite-plugin-style-import';
 const CWD = process.cwd()
+
 
 
 // https://cn.vitejs.dev/config/
@@ -34,6 +44,15 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       Components({
         resolvers: [ElementPlusResolver()],
       }),
+      styleImport({
+        libs: [
+          {
+            libraryName: 'vant',
+            esModule: true,
+            resolveStyle: (name) => `vant/es/${name}/style`,
+          },
+        ],
+      })
     ],
     resolve: {          // 类型：Record<string, string> | Array<{ find: string | RegExp, replacement: string }> 将会被传递到 @rollup/plugin-alias 作为它的 entries。
       alias: {
@@ -77,5 +96,3 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     },
   }
 }
-// https://vitejs.dev/config/
-// export default defineConfig();

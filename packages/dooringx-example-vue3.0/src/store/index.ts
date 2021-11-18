@@ -1,4 +1,12 @@
-import { InjectionKey } from '@vue/runtime-core';
+/*
+ * @Author: GeekQiaQia
+ * @Date: 2021-07-21 00:09:24
+ * @LastEditTime: 2021-11-18 17:36:39
+ * @LastEditors: GeekQiaQia
+ * @Description:
+ * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/store/index.ts
+ */
+import { InjectionKey } from 'vue';
 import { createStore, Store, useStore as baseUseStore } from 'vuex';
 
 import RootStateTypes, { AllStateTypes } from './types';

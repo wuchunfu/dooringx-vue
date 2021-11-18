@@ -1,3 +1,11 @@
+/*
+ * @Author: GeekQiaQia
+ * @Date: 2021-11-09 16:07:18
+ * @LastEditTime: 2021-11-17 17:44:40
+ * @LastEditors: GeekQiaQia
+ * @Description:
+ * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/main.ts
+ */
 import { createApp } from 'vue';
 import { key, store } from './store/index';
 import router from './router/index';
@@ -9,6 +17,9 @@ import locale from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 // windicss
 import 'virtual:windi.css'
+// iconfont
+import './assets/icons/iconfont/iconfont.css'
+
 
 // 1、挂载vuex
 // 2、挂载路由
