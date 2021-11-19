@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-17 13:38:18
- * @LastEditTime: 2021-11-17 16:35:58
+ * @LastEditTime: 2021-11-19 19:17:26
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/plugin/registComponents/button.tsx
@@ -17,13 +17,14 @@ import { createPannelOptions } from '@dooring/dooringx-vue-lib/src/core/componen
 import { FormMap } from '../formTypes';
 
 function ButtonTemp(pr: ComponentRenderConfigProps) {
+  console.log(pr);
   const { data } = pr;
   const props = pr.data.props;
   return (
     <Button
       style={{
-        width: data.width,
-        height: data.height,
+        width: props.width+'px',
+        height: props.height+'px',
         borderRadius: props.borderRadius + 'px',
         border: `${props.borderData.borderWidth}px ${props.borderData.borderStyle} ${props.borderData.borderColor}`,
         backgroundColor: props.backgroundColor,

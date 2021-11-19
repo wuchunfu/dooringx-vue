@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-16 17:17:35
- * @LastEditTime: 2021-11-18 17:14:50
+ * @LastEditTime: 2021-11-19 17:48:54
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/index.ts
@@ -15,5 +15,11 @@ export  type { InitConfig } from './config/index';
 
 // 用户的设置 包括可以获取store commander
 export { default as UserConfig } from './config/index';
+// 导出初始化数据仓库
+export { defaultStore } from './config';
+
+export type {IStoreData} from './core/store/storeTypes'
+// 初始化store时候使用
+export { useStoreState } from './hooks';
 
 export const injectKey: InjectionKey<ReturnType<any>> = Symbol()

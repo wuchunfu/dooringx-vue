@@ -1,32 +1,35 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-19 16:23:09
- * @LastEditTime: 2021-11-19 16:43:18
+ * @LastEditTime: 2021-11-19 18:46:47
  * @LastEditors: GeekQiaQia
  * @Description: 画布组件用来展示画布
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/container.tsx
  */
 
-import { defineComponent,computed ,reactive} from 'vue'
+import { defineComponent,computed ,reactive,inject} from 'vue'
+import Blocks from './blocks'
 import { cloneDeep } from 'lodash'
-import styles from './index.scss'
+import { useStoreState} from '@dooring/dooringx-vue-lib';
+
+import './index.scss'
 export default defineComponent({
   name: 'ContainerWrapper',
   props:{
-    modelValue:{type:Object}
+    config:{type:Object},
+    context:{type:String}
+  },
+  components:{
+    Blocks
   },
   setup(props) {
-    // 渲染动态blocks
-    const data=computed(()=>{
-      return props.modelValue
-    })
-    // mock
-    const state=reactive({
-      container:{
-        width:375,
-        height:667
-      }
-    });
+
+   const defaultConfig =computed(()=>{
+     return props.config
+   })
+
+    const [state]=useStoreState(defaultConfig.value);
+
     return ()=>(
       <>
         <div
@@ -40,8 +43,7 @@ export default defineComponent({
           <div style={{ display: 'flex' }}>
             <div
               id="dr-container"
-              class={styles.drContainer}
-
+              class="dr_container"
               style={{
                 height: `${state.container.height}px`,
                 width: `${state.container.width}px`,
@@ -57,16 +59,16 @@ export default defineComponent({
               {/* {props.context === 'edit' && (
                 <NormalMarkLineRender config={props.config} iframe={false}></NormalMarkLineRender>
               )}
-              {props.state.block.map((v) => {
+              */}
+              {state.block.map((v) => {
                 return (
                   <Blocks
-                    config={props.config}
                     key={v.id}
                     data={v}
                     context={props.context}
                   ></Blocks>
                 );
-              })} */}
+              })}
             </div>
           </div>
           {/* <div

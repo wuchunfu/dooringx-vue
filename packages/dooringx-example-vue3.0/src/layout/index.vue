@@ -1,7 +1,7 @@
 <!--
  * @Author: GeekQiaQia
  * @Date: 2021-11-11 16:29:01
- * @LastEditTime: 2021-11-19 16:39:45
+ * @LastEditTime: 2021-11-19 18:15:13
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/layout/index.vue
@@ -17,7 +17,7 @@
       </el-aside>
       <el-main>
         <container-wrapper>
-          <Container></Container>
+          <Container :config="config"></Container>
         </container-wrapper>
       </el-main>
     </el-container>
@@ -44,9 +44,11 @@ export default defineComponent({
   setup() {
 
   const config:UserConfig = inject(injectKey)
-
+  const state=reactive({
+    config
+  })
     return {
-      config
+      ...toRefs(state)
     }
   }
 })
