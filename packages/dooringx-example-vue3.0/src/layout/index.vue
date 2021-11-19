@@ -1,7 +1,7 @@
 <!--
  * @Author: GeekQiaQia
  * @Date: 2021-11-11 16:29:01
- * @LastEditTime: 2021-11-18 17:26:27
+ * @LastEditTime: 2021-11-19 16:39:45
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/layout/index.vue
@@ -16,31 +16,37 @@
         <Left/>
       </el-aside>
       <el-main>
-        <Wrapper/>
+        <container-wrapper>
+          <Container></Container>
+        </container-wrapper>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed, toRefs, ref, watchEffect } from 'vue'
+import { defineComponent, reactive, computed, toRefs, ref, watchEffect,inject } from 'vue'
 
 import Left from '../components/Left/index.vue'
 import Header from '../components/Header/index.vue'
-import Wrapper from '../components/Wrapper/index.vue'
+import ContainerWrapper from '../components/wrapperMove/index'
+import { injectKey,UserConfig } from '@dooring/dooringx-vue-lib';
+import Container from '../components/container'
 
 export default defineComponent({
   name: 'Layout',
   components: {
     Header,
     Left,
-    Wrapper
+    ContainerWrapper,
+    Container
   },
   setup() {
 
+  const config:UserConfig = inject(injectKey)
 
     return {
-
+      config
     }
   }
 })

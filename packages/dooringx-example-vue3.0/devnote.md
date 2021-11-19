@@ -1,7 +1,7 @@
 <!--
  * @Author: GeekQiaQia
  * @Date: 2021-11-15 17:03:49
- * @LastEditTime: 2021-11-18 10:45:49
+ * @LastEditTime: 2021-11-19 15:21:51
  * @LastEditors: GeekQiaQia
  * @Description: 
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/devnote.md
@@ -13,6 +13,7 @@
 *  左侧物料中心数据展示和遍历；
 *  构造一些假数据，实现位置渲染内容；
 * 配置组件对应映射关系:{preview:xxx,render:xxx}
+* jsonSchema 的作用是描述渲染器如何渲染组件；
 
 
 * 移动端组件使用 vant
