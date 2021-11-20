@@ -1,6 +1,6 @@
 {
-  "name": "dooringx-vue-lib",
-  "version": "0.1.3",
+  "name": "@dooring/dooringx-vue-lib",
+  "version": "0.0.0",
   "description": "> TODO: description",
   "keywords": [
     "dooringx-vue-lib"
@@ -8,7 +8,7 @@
   "author": "geekqiaqia <xiyangbai@outlook.com>",
   "homepage": "https://github.com/GeekQiaQia/dooringx-vue#readme",
   "license": "ISC",
-  "main": "lib/dooringx-vue-lib.js",
+  "main": "src/index.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -25,5 +25,13 @@
   },
   "bugs": {
     "url": "https://github.com/GeekQiaQia/dooringx-vue/issues"
+  },
+  "dependencies": {
+    "cz-customizable": "^6.3.0",
+    "deepcopy": "^2.1.0",
+    "vue": "^3.2.22"
+  },
+  "devDependencies": {
+    "cz-customizable": "^6.3.0"
   }
 }

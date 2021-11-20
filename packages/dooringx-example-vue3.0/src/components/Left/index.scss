@@ -1,0 +1,72 @@
+.leftConfig {
+  height: 100%;
+  contain: layout;
+
+  .el-tabs__header {
+    margin-right: 0;
+  }
+
+  .el-tabs__item {
+    height: 80px;
+    padding: 5px 16px;
+    margin:5px 0px;
+  }
+  .tabItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    [class^='el-icon-'] {
+      font-size: 20px;
+    }
+  }
+
+
+ .el-tabs__content {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .leftco {
+		padding: 10px;
+		display: flex;
+		justify-content: flex-start;
+    flex-wrap: wrap;
+    height: auto;
+    overflow: auto;
+
+		.coitem {
+			margin: 5px;
+      cursor: pointer;
+			.redbox {
+				height: 68px;
+				width: 68px;
+				background: #F7F8FA;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				#icon-checkbox,
+				#icon-tabs,
+				#icon-jiantou path {
+					fill: currentColor;
+        }
+        i{
+          width: 36px;
+          height: 36px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+      .displayName{
+        text-align: center;
+        line-height: 20px;
+        height: '20px';
+        overflow: 'hidden';
+        font-feature-settings: "tnum";
+        color: rgba(0, 0, 0, 0.85);
+        font-size: 14px;
+      }
+		}
+	}
+}
