@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-16 17:52:10
- * @LastEditTime: 2021-11-19 17:39:24
+ * @LastEditTime: 2021-11-20 15:40:35
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/config/index.tsx
@@ -12,6 +12,7 @@ import { LeftRegistComponentMapItem } from '../core/crossDrag';
 import { IBlockType, IStoreData } from '../core/store/storeTypes';
 import { ComponentItemFactory } from '../core/components/abstract';
 import Store from '../core/store';
+import {reactive} from 'vue'
 /**
  *
  * @urlFn 组件异步加载函数
@@ -270,10 +271,11 @@ export class UserConfig {
   // 获取当前store 仓库实例
 	getStore() {
 		return this.store;
+  }
+  // 获取注册组件实例
+	getComponentRegister() {
+		return this.componentRegister;
 	}
-	// getComponentRegister() {
-	// 	return this.componentRegister;
-	// }
 	// getContextMenuState() {
 	// 	return this.contextMenuState;
 	// }

@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "cz-customizable": "^6.3.0",
+    "deepcopy": "^2.1.0",
     "vue": "^3.2.22"
   },
   "devDependencies": {

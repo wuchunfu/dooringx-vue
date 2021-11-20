@@ -1,7 +1,7 @@
 <!--
  * @Author: GeekQiaQia
  * @Date: 2021-11-11 16:29:01
- * @LastEditTime: 2021-11-19 18:15:13
+ * @LastEditTime: 2021-11-20 14:00:19
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/layout/index.vue
@@ -17,7 +17,7 @@
       </el-aside>
       <el-main>
         <container-wrapper>
-          <Container :config="config"></Container>
+          <Container :config="config" context="edit"></Container>
         </container-wrapper>
       </el-main>
     </el-container>
@@ -27,7 +27,7 @@
 <script lang="ts">
 import { defineComponent, reactive, computed, toRefs, ref, watchEffect,inject } from 'vue'
 
-import Left from '../components/Left/index.vue'
+import Left from '../components/Left/index'
 import Header from '../components/Header/index.vue'
 import ContainerWrapper from '../components/wrapperMove/index'
 import { injectKey,UserConfig } from '@dooring/dooringx-vue-lib';

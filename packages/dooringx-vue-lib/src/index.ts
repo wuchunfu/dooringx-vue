@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-16 17:17:35
- * @LastEditTime: 2021-11-19 17:48:54
+ * @LastEditTime: 2021-11-20 14:45:55
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/index.ts
@@ -21,5 +21,7 @@ export { defaultStore } from './config';
 export type {IStoreData} from './core/store/storeTypes'
 // 初始化store时候使用
 export { useStoreState } from './hooks';
+
+export {useDragEventResolve,useContainerDragResolve} from './core/crossDrag/index'
 
 export const injectKey: InjectionKey<ReturnType<any>> = Symbol()

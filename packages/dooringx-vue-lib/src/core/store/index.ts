@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-19 17:08:04
- * @LastEditTime: 2021-11-19 19:15:05
+ * @LastEditTime: 2021-11-20 15:12:53
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/store/index.ts
@@ -16,50 +16,7 @@ export const initialData: IStoreData = {
 		width: 375,
 		height: 667,
 	},
-	block: [
-    {
-      id: "input-to0-ogdnOOaskrE-DbXbl",
-      top: 119,
-      zIndex: 0,
-      canDrag: true,
-      display: "block",
-      fixed: false,
-      focus: false,
-      left: 19,
-      resize: true,
-      name: "button",
-      props:{
-        width:100,
-        height:30,
-        "text": "primary",
-        "sizeData": [
-            100,
-            30
-        ],
-        "backgroundColor": "rgba(0,132,255,1)",
-        "lineHeight": 1,
-        "borderRadius": 0,
-        "borderData": {
-            "borderWidth": 0,
-            "borderColor": "rgba(0,0,0,1)",
-            "borderStyle": "solid"
-        },
-        "fontData": {
-            "fontSize": 14,
-            "textDecoration": "none",
-            "fontStyle": "normal",
-            "color": "rgba(255,255,255,1)",
-            "fontWeight": "normal"
-        },
-        "boxShadowData": {
-            "xOffset": 0,
-            "yOffset": 0,
-            "blurRadius": 4,
-            "color": "rgba(255,255,255,0)"
-        }
-      },
-      position: "absolute"}
-  ],
+	block: [],
 	modalMap: {},
 	dataSource: {},
 	globalState: {},
