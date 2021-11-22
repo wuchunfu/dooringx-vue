@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-19 18:26:05
- * @LastEditTime: 2021-11-22 22:51:14
+ * @LastEditTime: 2021-11-22 23:03:27
  * @LastEditors: GeekQiaQia
  * @Description: 用来渲染block 组件；
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/blocks.tsx
@@ -61,7 +61,7 @@ export default defineComponent({
                   height: '100%',
                   // ...animateCount,
                 }}
-              >
+              >·
                 {renderComponent}
               </div>
             )}
