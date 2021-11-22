@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-16 17:17:35
- * @LastEditTime: 2021-11-20 14:45:55
+ * @LastEditTime: 2021-11-22 22:00:44
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/index.ts
@@ -23,5 +23,13 @@ export type {IStoreData} from './core/store/storeTypes'
 export { useStoreState } from './hooks';
 
 export {useDragEventResolve,useContainerDragResolve} from './core/crossDrag/index'
+
+export {innerContainerDrag,innerDrag} from './core/innerDrag/index'
+
+export {containerFocusRemove} from './core/focusHandler/index'
+
+// 这个放到外层容器属性里 ...innerContainerDragUp()
+export { innerContainerDragUp } from './core/innerDrag';
+
 
 export const injectKey: InjectionKey<ReturnType<any>> = Symbol()

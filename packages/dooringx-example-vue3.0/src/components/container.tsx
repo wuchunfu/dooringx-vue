@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-19 16:23:09
- * @LastEditTime: 2021-11-20 15:56:10
+ * @LastEditTime: 2021-11-22 22:12:34
  * @LastEditors: GeekQiaQia
  * @Description: 画布组件用来展示画布
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/container.tsx
@@ -11,7 +11,7 @@ import { defineComponent,computed ,watchEffect,ref} from 'vue'
 import Blocks from './blocks'
 import { cloneDeep } from 'lodash'
 import { useStoreState} from '@dooring/dooringx-vue-lib';
-import {useContainerDragResolve} from '@dooring/dooringx-vue-lib'
+import {useContainerDragResolve,innerContainerDrag,containerFocusRemove} from '@dooring/dooringx-vue-lib'
 import './index.scss'
 export default defineComponent({
   name: 'ContainerWrapper',
@@ -23,10 +23,15 @@ export default defineComponent({
     Blocks
   },
   setup(props) {
-   const defaultConfig =computed(()=>{
-     return props.config
-   })
+
+    const defaultConfig =computed(()=>{
+      return props.config
+    })
+
     const {onDragOver,onDrop}=useContainerDragResolve();
+    const {onMouseMove}=innerContainerDrag(defaultConfig.value);
+    const {onMouseDown} =containerFocusRemove(defaultConfig.value);
+
     const state=ref();
     watchEffect(()=>{
     const [storeState]=useStoreState(defaultConfig.value);
@@ -57,8 +62,11 @@ export default defineComponent({
                 overflow: 'hidden',
                 // ...editContainerStyle,
               }}
+
               onDragover={e=>{onDragOver(e)}}
               onDrop={e=>{onDrop(e,defaultConfig.value)}}
+              onMousemove={e=>{onMouseMove(e)}}
+              onMousedown={e=>{onMouseDown(e)}}
               // {...(props.context === 'edit' ? {onDragOver:ondragover(e=>{})} : null)}
               // {...(props.context === 'edit' ? innerContainerDrag(props.config) : null)}
               // {...(props.context === 'edit' ? containerFocusRemove(props.config) : null)}
