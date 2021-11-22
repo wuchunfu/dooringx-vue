@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-17 13:38:18
- * @LastEditTime: 2021-11-19 19:17:26
+ * @LastEditTime: 2021-11-22 15:54:29
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/plugin/registComponents/button.tsx
@@ -22,20 +22,27 @@ function ButtonTemp(pr: ComponentRenderConfigProps) {
   const props = pr.data.props;
   return (
     <Button
-      style={{
-        width: props.width+'px',
-        height: props.height+'px',
-        borderRadius: props.borderRadius + 'px',
-        border: `${props.borderData.borderWidth}px ${props.borderData.borderStyle} ${props.borderData.borderColor}`,
-        backgroundColor: props.backgroundColor,
-        color: props.fontData.color,
-        fontSize: props.fontData.fontSize,
-        fontWeight: props.fontData.fontWeight,
-        fontStyle: props.fontData.fontStyle,
-        textDecoration: props.fontData.textDecoration,
-        lineHeight: props.lineHeight,
-        boxShadow: `${props.boxShadowData.xOffset}px ${props.boxShadowData.yOffset}px ${props.boxShadowData.blurRadius}px ${props.boxShadowData.color}`,
-      }}
+      type={props.type}
+      text={props.text}
+      // plain
+      // hairline
+      size={props.size}
+      color={props.color}
+
+      // style={{
+      //   width: props.width+'px',
+      //   height: props.height+'px',
+      //   borderRadius: props.borderRadius + 'px',
+      //   border: `${props.borderData.borderWidth}px ${props.borderData.borderStyle} ${props.borderData.borderColor}`,
+      //   backgroundColor: props.backgroundColor,
+      //   color: props.fontData.color,
+      //   fontSize: props.fontData.fontSize,
+      //   fontWeight: props.fontData.fontWeight,
+      //   fontStyle: props.fontData.fontStyle,
+      //   textDecoration: props.fontData.textDecoration,
+      //   lineHeight: props.lineHeight,
+      //   boxShadow: `${props.boxShadowData.xOffset}px ${props.boxShadowData.yOffset}px ${props.boxShadowData.blurRadius}px ${props.boxShadowData.color}`,
+      // }}
       onClick={() => {
 
       }}
@@ -117,7 +124,11 @@ const MButton = new ComponentItemFactory(
   },
   {
     props: {
-      text: 'primary',
+      text: '主要按钮',
+      size:'normal',
+      type:'primary',
+      color:'#7232dd',
+
       sizeData: [100, 30],
       backgroundColor: 'rgba(0,132,255,1)',
       lineHeight: 1,

@@ -1,13 +1,13 @@
 <!--
  * @Author: GeekQiaQia
  * @Date: 2021-11-11 16:29:01
- * @LastEditTime: 2021-11-20 14:00:19
+ * @LastEditTime: 2021-11-22 22:13:03
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/layout/index.vue
 -->
 <template>
-  <el-container>
+  <el-container  @mouseup="onMouseUp" >
     <el-header height="80px" class="flex items-center shadow-md">
            <Header />
     </el-header>
@@ -32,7 +32,7 @@ import Header from '../components/Header/index.vue'
 import ContainerWrapper from '../components/wrapperMove/index'
 import { injectKey,UserConfig } from '@dooring/dooringx-vue-lib';
 import Container from '../components/container'
-
+import {innerContainerDragUp} from '@dooring/dooringx-vue-lib'
 export default defineComponent({
   name: 'Layout',
   components: {
@@ -43,12 +43,15 @@ export default defineComponent({
   },
   setup() {
 
+
   const config:UserConfig = inject(injectKey)
   const state=reactive({
     config
   })
+  const {onMouseUp} =innerContainerDragUp(state.config)
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      onMouseUp
     }
   }
 })

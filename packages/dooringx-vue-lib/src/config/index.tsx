@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-16 17:52:10
- * @LastEditTime: 2021-11-20 15:40:35
+ * @LastEditTime: 2021-11-22 16:25:10
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/config/index.tsx
@@ -13,6 +13,7 @@ import { IBlockType, IStoreData } from '../core/store/storeTypes';
 import { ComponentItemFactory } from '../core/components/abstract';
 import Store from '../core/store';
 import {reactive} from 'vue'
+import {focusState} from '../core/focusHandler/state'
 /**
  *
  * @urlFn 组件异步加载函数
@@ -172,7 +173,7 @@ export class UserConfig {
 
 	public componentCache = {};
 	public asyncComponentUrlMap = {} as AsyncCacheComponentType;
-
+	public focusState = focusState;
 	public collapsed = false;
 	public ticker = true;
 
@@ -249,10 +250,10 @@ export class UserConfig {
 	// 		iframe: this.iframeWrapperMoveState,
 	// 	};
 	// }
-
-	// getFocusState() {
-	// 	return this.focusState;
-	// }
+  // 获取当前block组件选中元素，多个元素选中可以为数组；
+	getFocusState() {
+		return this.focusState;
+	}
 	// getScaleState() {
 	// 	return this.scaleState;
 	// }
