@@ -1,28 +1,32 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-17 00:10:16
- * @LastEditTime: 2021-11-19 16:42:39
+ * @LastEditTime: 2021-11-23 17:37:07
  * @LastEditors: GeekQiaQia
  * @Description: 负责包裹容器的事件监听以及  鼠标事件的处理；
- * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/wrapperMove/index.tsx
+ * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/containerWrapper/index.tsx
  */
-import { defineComponent,computed,renderSlot, useSlots  } from 'vue'
+import { defineComponent,computed,renderSlot, useSlots,ref  } from 'vue'
+import { wrapperEvent,UserConfig } from "@dooring/dooringx-vue-lib";
 
-import { cloneDeep } from 'lodash'
 export default defineComponent({
   name: 'ContainerWrapper',
   props:{
-    modelValue:{type:Object}
+    config:{type:UserConfig},
   },
   setup(props) {
     const slots=useSlots();
+    const wrapperRef = ref(null);
+    console.log("config",props.config);
     // 渲染动态blocks
-    const data=computed(()=>{
-      return props.modelValue
+    const defaulgConfig=computed(()=>{
+      return props.config
     })
     return ()=>(
       <>
-        <div style={{
+        <div
+          ref={wrapperRef}
+        style={{
           backgroundColor: '#f0f0f0',
           height: '100%',
           display: 'flex',
@@ -32,7 +36,11 @@ export default defineComponent({
           position: 'relative',
           overflow: 'hidden',
           userSelect: 'none',
-        }}>
+
+        }}
+
+        {...wrapperEvent(wrapperRef.value, defaulgConfig.value)}
+        >
           {renderSlot(slots, 'default')}
         </div>
       </>

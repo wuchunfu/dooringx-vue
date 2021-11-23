@@ -1,7 +1,7 @@
 <!--
  * @Author: GeekQiaQia
  * @Date: 2021-11-11 16:29:01
- * @LastEditTime: 2021-11-22 22:13:03
+ * @LastEditTime: 2021-11-23 18:03:41
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/layout/index.vue
@@ -16,8 +16,8 @@
         <Left/>
       </el-aside>
       <el-main>
-        <container-wrapper>
-          <Container :config="config" context="edit"></Container>
+        <container-wrapper :config="config">
+          <Container :store-state="storeState" :config="config" context="edit"></Container>
         </container-wrapper>
       </el-main>
     </el-container>
@@ -29,10 +29,9 @@ import { defineComponent, reactive, computed, toRefs, ref, watchEffect,inject } 
 
 import Left from '../components/Left/index'
 import Header from '../components/Header/index.vue'
-import ContainerWrapper from '../components/wrapperMove/index'
-import { injectKey,UserConfig } from '@dooring/dooringx-vue-lib';
+import ContainerWrapper from '../components/ContainerWrapper/index'
+import { injectKey,UserConfig,innerContainerDragUp ,useStoreState} from '@dooring/dooringx-vue-lib';
 import Container from '../components/container'
-import {innerContainerDragUp} from '@dooring/dooringx-vue-lib'
 export default defineComponent({
   name: 'Layout',
   components: {
@@ -43,15 +42,23 @@ export default defineComponent({
   },
   setup() {
 
-
   const config:UserConfig = inject(injectKey)
   const state=reactive({
     config
   })
+
+   // const [storeState]=useStoreState(defaultConfig.value);
+    // state.value=storeState
+    const storeState=ref();
+    watchEffect(()=>{
+     storeState.value=useStoreState(state.config);
+    });
+
   const {onMouseUp} =innerContainerDragUp(state.config)
     return {
       ...toRefs(state),
-      onMouseUp
+      onMouseUp,
+      storeState
     }
   }
 })
