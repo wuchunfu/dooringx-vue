@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-20 13:47:10
- * @LastEditTime: 2021-11-20 13:50:52
+ * @LastEditTime: 2021-11-23 17:02:52
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/components/createBlock.ts
@@ -32,9 +32,9 @@ export function createBlock(top: number, left: number, ComponentItem: ComponentI
 		// functionList: ComponentItem.initData.functionList || [],
 		// animate: ComponentItem.initData.animate || {},
 		fixed: ComponentItem.initData.fixed || false,
-		// rotate: ComponentItem.initData.rotate || {
-		// 	value: 0,
-		// 	canRotate: true,
-		// },
+		rotate: ComponentItem.initData.rotate || {
+			value: 0,
+			canRotate: true,
+		},
 	};
 }

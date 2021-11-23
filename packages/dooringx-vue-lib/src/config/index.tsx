@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-16 17:52:10
- * @LastEditTime: 2021-11-22 16:25:10
+ * @LastEditTime: 2021-11-23 13:23:22
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/config/index.tsx
@@ -14,6 +14,8 @@ import { ComponentItemFactory } from '../core/components/abstract';
 import Store from '../core/store';
 import {reactive} from 'vue'
 import {focusState} from '../core/focusHandler/state'
+import { scaleState } from '../core/scale/state';
+
 /**
  *
  * @urlFn 组件异步加载函数
@@ -170,6 +172,7 @@ export class UserConfig {
 	public initConfig: InitConfig;
   public store = new Store();
 	public componentRegister = new ComponentRegister();
+	public scaleState = scaleState;
 
 	public componentCache = {};
 	public asyncComponentUrlMap = {} as AsyncCacheComponentType;
@@ -254,9 +257,9 @@ export class UserConfig {
 	getFocusState() {
 		return this.focusState;
 	}
-	// getScaleState() {
-	// 	return this.scaleState;
-	// }
+	getScaleState() {
+		return this.scaleState;
+	}
 	// getDataCenter() {
 	// 	return this.dataCenter;
 	// }

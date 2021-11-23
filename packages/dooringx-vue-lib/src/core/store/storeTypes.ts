@@ -1,10 +1,10 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-17 15:28:36
- * @LastEditTime: 2021-11-17 15:28:36
+ * @LastEditTime: 2021-11-23 16:59:21
  * @LastEditors: GeekQiaQia
  * @Description:
- * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/store/storeTypes.ts
+ * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/store/storeTypes.ts
  */
 
 export interface IStoreData {
@@ -35,10 +35,10 @@ export interface IBlockType {
 	props: Record<string, any>;
 	// syncList: Array<string>;
 	// functionList: Array<string>; //抛出的函数名
-	// rotate: {
-	// 	value: number;
-	// 	canRotate: boolean;
-	// };
+	rotate: {
+		value: number;
+		canRotate: boolean;
+	};
 	// animate: {
 	// 	animate?: string; //动画名
 	// 	animationIterationCount?: number | string;

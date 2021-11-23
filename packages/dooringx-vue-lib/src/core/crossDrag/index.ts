@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-17 13:56:33
- * @LastEditTime: 2021-11-20 15:30:44
+ * @LastEditTime: 2021-11-23 17:27:23
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/crossDrag/index.ts
@@ -29,29 +29,28 @@ export interface LeftRegistComponentMapItem {
 }
 
 let currentDrag: LeftRegistComponentMapItem | null = null;
-export const useDragEventResolve = function () {
+export const dragEventResolve = function (item: LeftRegistComponentMapItem,) {
 	return {
 		draggable: true,
-		onDragStart: (item: LeftRegistComponentMapItem,e?:Event) => {
+		onDragstart: (e?:Event) => {
       currentDrag = item;
     },
-		onDragOver: (e: DragEvent) => {
+		onDragover: (e: DragEvent) => {
 			e.preventDefault();
 		},
 		onDrop: () => {},
-		onDragEnd: () => {},
+		onDragend: () => {},
 	};
 };
 
-export const useContainerDragResolve = () => {
-
+export const containerDragResolve = (config: UserConfig) => {
+  const store = config.getStore();
 	return {
-		onDragStart: () => {},
-		onDragOver: (e: DragEvent) => {
+		onDragstart: () => {},
+		onDragover: (e: DragEvent) => {
 			e.preventDefault();
 		},
-		onDrop: (e: DragEvent,config: UserConfig) => {
-      const store = config.getStore();
+		onDrop: (e: DragEvent) => {
       const componentRegister = config.getComponentRegister();
 			const offsetX = Math.round(e.offsetX);
       const offestY = Math.round(e.offsetY);
@@ -84,6 +83,6 @@ export const useContainerDragResolve = () => {
 			}
 			currentDrag = null;
 		},
-		onDragEnd: () => {},
+		onDragend: () => {},
 	};
 };

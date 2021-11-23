@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-22 15:58:34
- * @LastEditTime: 2021-11-22 22:08:44
+ * @LastEditTime: 2021-11-23 16:39:48
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/innerDrag/index.ts
@@ -11,22 +11,24 @@ import UserConfig from '../../config';
 import { IBlockType } from '../store/storetypes';
 import { innerDragState} from "./state";
 import { blockFocus } from "../focusHandler/index";
-import { deepCopy } from '../utils';
+import { deepCopy,isMac } from '../utils';
 import { wrapperMoveMouseUp } from "../wrapperMove/index";
+
+
 /**
  * @description 获取焦点
  *
 */
-export const innerDrag = function () {
-	return {
-    onMouseDown: (e: MouseEvent,item: IBlockType,config: UserConfig,ref: HTMLDivElement) => {
+export const innerDrag = function (item: IBlockType,config: UserConfig,ref: HTMLDivElement) {
+  const store = config.getStore();
 
-			e.preventDefault();
+	return {
+
+    onMousedown: (e: MouseEvent,) => {
+
       e.stopPropagation();
 
-      const store = config.getStore();
 
-      console.log(ref);
 			//特殊元素不可操作
 			// if (specialCoList.includes(item.name)) {
 			// 	containerFocusRemove(config).onMouseDown(e);
@@ -57,27 +59,24 @@ export const innerDrag = function () {
 			innerDragState.startX = Math.round(e.clientX);
 			innerDragState.startY = Math.round(e.clientY);
 			innerDragState.item = item;
-			// innerDragState.itemX = item.left; 会导致框选后移动问题
-			// innerDragState.itemY = item.top;
 			innerDragState.isDrag = true;
-			// innerDragState.ref = ref;
+			innerDragState.ref = ref;
       innerDragState.current = store.getIndex();
-      console.log(config.getFocusState());
 		},
 	};
 };
 
 /**
  *
- * @description  画布容器中拖拽
+ * @description  画布container容器监听Mousemove事件，更新当前选中blocks的left,top属性；并记录移动block的startX,startY;
  *
 */
 export const innerContainerDrag = function (config: UserConfig) {
 	let lastblock: null | IBlockType;
 	const store = config.getStore();
-	// const scaleState = config.getScaleState();  // 暂时忽略旋转 ；
-	const onMouseMove = (e: MouseEvent) => {
-		e.preventDefault();
+	const scaleState = config.getScaleState();  //获取当前缩放value;
+	const onMousemove = (e: MouseEvent) => {
+    // 右键菜单
 		// if (isMac() && contextMenuState.state) {
 		// 	//mac有bug
 		// 	return;
@@ -88,14 +87,15 @@ export const innerContainerDrag = function (config: UserConfig) {
 			const current = store.getData().block.find((v) => v.id === id);
 			if (current?.position === 'static') {
 				return;
-			}
+      }
+
 			let { clientX: moveX, clientY: moveY } = e;
 			const { startX, startY } = innerDragState;
-    // 	const scale = scaleState.value;
-    // let durX = Math.round((moveX - startX) / scale);
-    // let durY = Math.round((moveY - startY) / scale);
-			let durX = Math.round((moveX - startX) );
-			let durY = Math.round((moveY - startY) );
+      const scale = scaleState.value;
+
+      let durX = Math.round((moveX - startX) / scale);
+      let durY = Math.round((moveY - startY) / scale);
+
 			let newblock: IBlockType[];
 			if (lastblock !== innerDragState.item) {
 				const cloneblock: IBlockType[] = deepCopy(store.getData().block);
@@ -120,14 +120,14 @@ export const innerContainerDrag = function (config: UserConfig) {
 			innerDragState.startX = moveX;
 			innerDragState.startY = moveY;
 		}
-		// resizerMouseMove(e, config);
-		// rotateMouseMove(e, config);
+		// resizerMouseMove(e, config);  // 暂时不考虑resize
+		// rotateMouseMove(e, config);  // 暂时不考虑 rotate;
 		// if (selectData.selectDiv) {
 		// 	selectRangeMouseMove(e);
 		// }
 	};
 	return {
-		onMouseMove,
+		onMousemove,
 	};
 };
 

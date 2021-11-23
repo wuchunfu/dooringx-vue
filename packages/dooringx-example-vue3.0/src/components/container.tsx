@@ -1,45 +1,43 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-19 16:23:09
- * @LastEditTime: 2021-11-22 22:12:34
+ * @LastEditTime: 2021-11-23 17:58:26
  * @LastEditors: GeekQiaQia
  * @Description: 画布组件用来展示画布
- * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/container.tsx
+ * @FilePath: /dooring/dooringx-vue/packages/dooringx-example-vue3.0/src/components/container.tsx
  */
 
-import { defineComponent,computed ,watchEffect,ref} from 'vue'
+import { defineComponent,computed } from 'vue'
 import Blocks from './blocks'
-import { cloneDeep } from 'lodash'
-import { useStoreState} from '@dooring/dooringx-vue-lib';
-import {useContainerDragResolve,innerContainerDrag,containerFocusRemove} from '@dooring/dooringx-vue-lib'
+import { containerResizer,wrapperMoveState,UserConfig} from '@dooring/dooringx-vue-lib';
+import {containerDragResolve,innerContainerDrag,containerFocusRemove} from '@dooring/dooringx-vue-lib'
+import VerticalAllignMiddle from './icons/verticalAllignMiddle.vue'
+import GiteeIcon from './icons/gitee.vue'
 import './index.scss'
 export default defineComponent({
   name: 'ContainerWrapper',
   props:{
-    config:{type:Object},
+    storeState:{type:Object},
+    config:{type:UserConfig},
     context:{type:String}
   },
   components:{
-    Blocks
+    Blocks,
+    GiteeIcon,
+    VerticalAllignMiddle
   },
   setup(props) {
-
+    console.log(props);
     const defaultConfig =computed(()=>{
       return props.config
     })
 
-    const {onDragOver,onDrop}=useContainerDragResolve();
-    const {onMouseMove}=innerContainerDrag(defaultConfig.value);
-    const {onMouseDown} =containerFocusRemove(defaultConfig.value);
+	  const scaleState = defaultConfig.value.getScaleState();
 
-    const state=ref();
-    watchEffect(()=>{
-    const [storeState]=useStoreState(defaultConfig.value);
-    state.value=storeState
-    console.log(state);
+    const state=computed(()=>{
+      return props.storeState
+    })
 
-
-    });
     return ()=>(
       <>
         <div
@@ -47,7 +45,7 @@ export default defineComponent({
             position: 'absolute',
             height: `${state.value.container.height + 60}px`,
             width: `${state.value.container.width}px`,
-            // transform: `scale(${scaleState.value}) translate(${wrapperMoveState.needX}px, ${wrapperMoveState.needY}px)`,
+            transform: `scale(${scaleState.value}) translate(${wrapperMoveState.needX}px, ${wrapperMoveState.needY}px)`,
           }}
         >
           <div style={{ display: 'flex' }}>
@@ -62,14 +60,9 @@ export default defineComponent({
                 overflow: 'hidden',
                 // ...editContainerStyle,
               }}
-
-              onDragover={e=>{onDragOver(e)}}
-              onDrop={e=>{onDrop(e,defaultConfig.value)}}
-              onMousemove={e=>{onMouseMove(e)}}
-              onMousedown={e=>{onMouseDown(e)}}
-              // {...(props.context === 'edit' ? {onDragOver:ondragover(e=>{})} : null)}
-              // {...(props.context === 'edit' ? innerContainerDrag(props.config) : null)}
-              // {...(props.context === 'edit' ? containerFocusRemove(props.config) : null)}
+							{...(props.context === 'edit' ? containerDragResolve(defaultConfig.value) : null)}
+              {...(props.context === 'edit' ? innerContainerDrag(defaultConfig.value)  : null)}
+              {...(props.context === 'edit' ? containerFocusRemove(defaultConfig.value) : null)}
             >
               {/* {props.context === 'edit' && (
                 <NormalMarkLineRender config={props.config} iframe={false}></NormalMarkLineRender>
@@ -86,22 +79,22 @@ export default defineComponent({
               })}
             </div>
           </div>
-          {/* <div
+          <div
             style={{
               height: '50px',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              width: `${props.state.container.width}px`,
+              width: `${state.value.container.width}px`,
             }}
           >
             <div
               style={{ fontSize: '20px', cursor: 's-resize' }}
-              onMouseDown={(e) => containerResizer.onMousedown(e, props.config)}
+              onMousedown={(e) => containerResizer.onMousedown(e, defaultConfig.value)}
             >
-              {props.config.getConfig().containerIcon}
+              <VerticalAllignMiddle></VerticalAllignMiddle>
             </div>
-          </div> */}
+          </div>
         </div>
     </>
     )

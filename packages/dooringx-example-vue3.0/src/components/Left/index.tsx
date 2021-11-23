@@ -2,7 +2,7 @@
 import { defineComponent, reactive,computed, ref, inject } from 'vue'
 import { injectKey,UserConfig } from '@dooring/dooringx-vue-lib';
 import  './index.scss'
-import {useDragEventResolve} from '@dooring/dooringx-vue-lib'
+import {dragEventResolve} from '@dooring/dooringx-vue-lib'
 export default defineComponent({
   name: 'LeftConfig',
   setup() {
@@ -23,23 +23,7 @@ export default defineComponent({
     const handleClick=(tab:any, event:any) =>{
       state.activeType=tab.instance.attrs.type;
     }
-    // const onDragStart=(item)=>{
-    //   console.log("item is ");
-    // }
-    // const onDragOver=(e)=>{
-    //   e.preventDefault();
-    // }
-    const  {onDragStart,onDragOver}=useDragEventResolve()
-    const dragStart=(e)=>{
-      console.log(e,'in to drag');
-    }
-     const testRest=()=>{
-       return {
-        onDragStart: () => {
-          console.log('on drag start');
-        },
-       }
-     }
+
      return ()=>(
        <>
         <el-tabs v-model={state.activeName} tab-position="left" class="leftConfig" onTabClick={handleClick}>
@@ -61,9 +45,7 @@ export default defineComponent({
                      <>
                        <div
                         class="coitem"
-                        draggable
-                        onDragover={e=>{onDragOver}}
-                        onDragstart={e=>{onDragStart(list,e)}}
+                        {...dragEventResolve(list)}
                        >
                         <div class="redbox">
                           <i class={` icon iconfont ${list.img}`}></i>
@@ -87,34 +69,3 @@ export default defineComponent({
 
   }
 })
-
-{/* <el-tabs v-model="activeName" tab-position="left" class="left-config" @tab-click="handleClick"> */}
-// <template v-for="tabItem in tabs"  :key="tabItem.type">
-//   <el-tab-pane :name="tabItem.displayName" :type="tabItem.type" lazy >
-//     <template #label>
-//       <div class="tab-item">
-//         <i style="font-size:22px" class="icon iconfont" :class="tabItem.icon"></i>
-//         {{ tabItem.displayName }}
-//       </div>
-//     </template>
-//          <div class="leftco">
-//         <template v-for="list in checkList" :key="list.component">
-//               <div
-//                 class="coitem"
-//                 draggable="true"
-//                 :onDragStart="onDragStart(list)"
-//               >
-// //                 <div class="redbox">
-// //                   <i class="icon iconfont" :class="list.img"></i>
-//                 </div>
-                // <div class="displayName">
-                //   {{list.displayName}}
-                // </div>
-//               </div>
-//         </template>
-//        </div>
-//   </el-tab-pane>
-// </template>
-
-// </el-tabs>
-
