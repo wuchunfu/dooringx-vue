@@ -20,12 +20,12 @@ export default defineComponent({
   setup(props) {
     const blockStyles=computed<CSSProperties>(():CSSProperties=>{
         return {
-          position: props.data.position,
-          top:`${props.data.top}px`,
-          left:`${props.data.top}px`,
+          position: props.data!.position,
+          top:`${props.data!.top}px`,
+          left:`${props.data!.left}px`,
           zIndex:props?.data?.zIndex as number,
-          display: props.data.display,
-          transform: `rotate(${props.data.rotate.value}deg)`,
+          display: props.data!.display,
+          transform: `rotate(${props.data!.rotate.value}deg)`,
         }
           // return {
           //   opacity: props?.iframe ? 0 : 1,
@@ -34,10 +34,10 @@ export default defineComponent({
 
     const previewState=computed(()=>{
        return {
-        top:`${props.data.top}px`,
-        left:`${props.data.top}px`,
-        height: `${props.data.height}px`,
-        width: `${props.data.width}px`,
+        top:`${props.data!.top}px`,
+        left:`${props.data!.left}px`,
+        height: `${props.data!.height}px`,
+        width: `${props.data!.width}px`,
        }
     })
 
@@ -46,27 +46,27 @@ export default defineComponent({
    })
 
    const config:UserConfig = inject(injectKey)
-   const component =config.componentRegister.getComp(block.value.name)
-   const renderComponent=component.render(props.data,props.context);
+   const component =config.componentRegister.getComp(block.value!.name)
+   const renderComponent=component.render(props.data!,props.context);
    const blockRef=ref(null);
-   const styleDrag: CSSProperties = block.value.canDrag ? { pointerEvents: 'none' } : {};
+   const styleDrag: CSSProperties = block.value!.canDrag ? { pointerEvents: 'none' } : {};
     return ()=>{
         if(renderComponent && props.context === 'edit'){
           return    (
           <>
-            <div  class={block.value.focus && block.value.position !== 'static' ?'editor_block dr_block_focus':'editor_block' }
+            <div  class={block.value!.focus && block.value!.position !== 'static' ?'editor_block dr_block_focus':'editor_block' }
                 ref={blockRef} style={{...blockStyles.value}}
-                {...innerDrag(block.value,config,blockRef.value)}
+                {...innerDrag(block.value!,config,blockRef.value)}
                 >
 
                     {/* 绝对定位元素 */}
-                  {block.value.position !== 'static' && (
+                  {block.value!.position !== 'static' && (
                     <div  style={{ ...styleDrag }}>
                         {renderComponent}
                     </div>
                   )}
                     {/* 静态定位 非行内 这里暂不考虑布局影响 */}
-                {block.value.position === 'static' && block.value.display !== 'inline' && (
+                {block.value!.position === 'static' && block.value!.display !== 'inline' && (
                   <div
                     // className={animatecss}
                     style={{
@@ -80,7 +80,7 @@ export default defineComponent({
                   </div>
                 )}
                   {/* 静态定位 行内 这里暂不考虑布局影响 */}
-                {block.value.position === 'static' && block.value.display === 'inline' && (
+                {block.value!.position === 'static' && block.value!.display === 'inline' && (
                   <span style={{ pointerEvents: 'none' }}>{renderComponent}</span>
                 )}
             </div>
@@ -91,14 +91,14 @@ export default defineComponent({
             <div
                 // className={animatecss}
                 style={{
-                  position: block.value.fixed ? 'fixed' : block.value.osition,
+                  position: block.value!.fixed ? 'fixed' : block.value!.position,
                   top: previewState.value.top,
                   left: previewState.value.left,
                   width: previewState.value.width,
                   height: previewState.value.height,
-                  zIndex: block.value.zIndex,
-                  display: block.value.display,
-                  transform: `rotate(${block.value.rotate.value}deg)`,
+                  zIndex: block.value!.zIndex,
+                  display: block.value!.display,
+                  transform: `rotate(${block.value!.rotate.value}deg)`,
                   // ...animateCount,
                 }}
               >
