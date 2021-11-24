@@ -16,7 +16,8 @@
     "lint": "eslint --ext .js  packages/**/*.js --no-error-on-unmatched-pattern --fix",
     "start:example": "lerna exec yarn run dev --scope=dooringx-example-vue3.0",
     "build": "lerna exec yarn run build --scope=dooringx-example-vue3.0",
-    "format": "yarn prettier --write"
+    "format": "yarn prettier --write",
+    "prettier": "prettier --ignore-path .gitignore --write \"packages/*/+(src|__tests__)/**/*.+(ts|tsx|vue)\""
   },
   "config": {
     "commitizen": {

@@ -7,45 +7,45 @@
  * @FilePath: /dooring/dooringx-vue/packages/dooringx-example-vue3.0/src/components/container.tsx
  */
 
-import { defineComponent,computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 import Blocks from './blocks'
-import { containerResizer,wrapperMoveState,UserConfig} from '@dooring/dooringx-vue-lib';
-import {containerDragResolve,innerContainerDrag,containerFocusRemove} from '@dooring/dooringx-vue-lib'
+import { containerResizer, wrapperMoveState, UserConfig } from '@dooring/dooringx-vue-lib'
+import { containerDragResolve, innerContainerDrag, containerFocusRemove } from '@dooring/dooringx-vue-lib'
 import VerticalAllignMiddle from './icons/verticalAllignMiddle.vue'
 import GiteeIcon from './icons/gitee.vue'
 import './index.scss'
 export default defineComponent({
   name: 'ContainerWrapper',
-  props:{
-    storeState:{type:Object},
-    config:{type:UserConfig},
-    context:{type:String}
+  props: {
+    storeState: { type: Object },
+    config: { type: UserConfig },
+    context: { type: String }
   },
-  components:{
+  components: {
     Blocks,
     GiteeIcon,
     VerticalAllignMiddle
   },
   setup(props) {
-    console.log(props);
-    const defaultConfig =computed(()=>{
+    console.log(props)
+    const defaultConfig = computed(() => {
       return props.config
     })
 
-	  const scaleState = defaultConfig.value.getScaleState();
+    const scaleState = defaultConfig.value.getScaleState()
 
-    const state=computed(()=>{
+    const state = computed(() => {
       return props.storeState
     })
 
-    return ()=>(
+    return () => (
       <>
         <div
           style={{
             position: 'absolute',
             height: `${state.value.container.height + 60}px`,
             width: `${state.value.container.width}px`,
-            transform: `scale(${scaleState.value}) translate(${wrapperMoveState.needX}px, ${wrapperMoveState.needY}px)`,
+            transform: `scale(${scaleState.value}) translate(${wrapperMoveState.needX}px, ${wrapperMoveState.needY}px)`
           }}
         >
           <div style={{ display: 'flex' }}>
@@ -57,11 +57,11 @@ export default defineComponent({
                 width: `${state.value.container.width}px`,
                 backgroundColor: 'rgb(255, 255, 255)',
                 position: 'relative',
-                overflow: 'hidden',
+                overflow: 'hidden'
                 // ...editContainerStyle,
               }}
-							{...(props.context === 'edit' ? containerDragResolve(defaultConfig.value) : null)}
-              {...(props.context === 'edit' ? innerContainerDrag(defaultConfig.value)  : null)}
+              {...(props.context === 'edit' ? containerDragResolve(defaultConfig.value) : null)}
+              {...(props.context === 'edit' ? innerContainerDrag(defaultConfig.value) : null)}
               {...(props.context === 'edit' ? containerFocusRemove(defaultConfig.value) : null)}
             >
               {/* {props.context === 'edit' && (
@@ -69,13 +69,7 @@ export default defineComponent({
               )}
               */}
               {state.value.block.map((v) => {
-                return (
-                  <Blocks
-                    key={v.id}
-                    data={v}
-                    context={props.context}
-                  ></Blocks>
-                );
+                return <Blocks key={v.id} data={v} context={props.context}></Blocks>
               })}
             </div>
           </div>
@@ -85,19 +79,15 @@ export default defineComponent({
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              width: `${state.value.container.width}px`,
+              width: `${state.value.container.width}px`
             }}
           >
-            <div
-              style={{ fontSize: '20px', cursor: 's-resize' }}
-              onMousedown={(e) => containerResizer.onMousedown(e, defaultConfig.value)}
-            >
+            <div style={{ fontSize: '20px', cursor: 's-resize' }} onMousedown={(e) => containerResizer.onMousedown(e, defaultConfig.value)}>
               <VerticalAllignMiddle></VerticalAllignMiddle>
             </div>
           </div>
         </div>
-    </>
+      </>
     )
   }
 })
-

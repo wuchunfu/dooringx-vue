@@ -7,17 +7,16 @@
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/plugin/registComponents/button.tsx
  */
 
+import { Button } from 'vant'
+import { ComponentItemFactory } from '@dooring/dooringx-vue-lib'
 
-import { Button } from 'vant';
-import {ComponentItemFactory} from '@dooring/dooringx-vue-lib'
+import { ComponentRenderConfigProps } from '@dooring/dooringx-vue-lib/src/core/components/componentItem'
+import { createPannelOptions } from '@dooring/dooringx-vue-lib/src/core/components/formTypes'
 
-import {ComponentRenderConfigProps} from '@dooring/dooringx-vue-lib/src/core/components/componentItem'
-import { createPannelOptions } from '@dooring/dooringx-vue-lib/src/core/components/formTypes';
-
-import { FormMap } from '../formTypes';
+import { FormMap } from '../formTypes'
 
 function ButtonTemp(pr: ComponentRenderConfigProps) {
-  const props = pr.data.props;
+  const props = pr.data.props
   return (
     <Button
       type={props.type}
@@ -26,7 +25,6 @@ function ButtonTemp(pr: ComponentRenderConfigProps) {
       // hairline
       size={props.size}
       color={props.color}
-
       // style={{
       //   width: props.width+'px',
       //   height: props.height+'px',
@@ -41,12 +39,9 @@ function ButtonTemp(pr: ComponentRenderConfigProps) {
       //   lineHeight: props.lineHeight,
       //   boxShadow: `${props.boxShadowData.xOffset}px ${props.boxShadowData.yOffset}px ${props.boxShadowData.blurRadius}px ${props.boxShadowData.color}`,
       // }}
-      onClick={() => {
-
-      }}
-    >
-    </Button>
-  );
+      onClick={() => {}}
+    ></Button>
+  )
 }
 
 const MButton = new ComponentItemFactory(
@@ -56,12 +51,12 @@ const MButton = new ComponentItemFactory(
     style: [
       createPannelOptions<FormMap, 'input'>('input', {
         receive: 'text', //用于发送回的props，必传 ,跨组件传递需要指定额外字段
-        label: '文字',
+        label: '文字'
       }),
       createPannelOptions<FormMap, 'color'>('color', {
         receive: 'backgroundColor',
         label: '背景颜色',
-        value: 'rgba(255,255,255,1)',
+        value: 'rgba(255,255,255,1)'
       }),
       createPannelOptions<FormMap, 'font'>('font', {
         receive: 'fontData', //用于发送回的props，必传 ,跨组件传递需要指定额外字
@@ -71,18 +66,18 @@ const MButton = new ComponentItemFactory(
           fontStyle: '',
           textDecoration: '',
           color: '',
-          fontWeight: '',
-        },
+          fontWeight: ''
+        }
       }),
       createPannelOptions<FormMap, 'inputNumber'>('inputNumber', {
         receive: 'lineHeight',
         label: '行高',
-        value: 2,
+        value: 2
       }),
       createPannelOptions<FormMap, 'inputNumber'>('inputNumber', {
         receive: 'borderRadius',
         label: '边框圆角',
-        value: 2,
+        value: 2
       }),
       createPannelOptions<FormMap, 'border'>('border', {
         receive: 'borderData',
@@ -91,22 +86,22 @@ const MButton = new ComponentItemFactory(
           borderWidth: 2,
           borderColor: 'rgba(0,0,0,1)',
           borderRadius: 2,
-          borderStyle: 'solid',
+          borderStyle: 'solid'
         },
         option: [
           {
             value: 'solid',
-            text: '实线',
+            text: '实线'
           },
           {
             value: 'dotted',
-            text: '圆点',
+            text: '圆点'
           },
           {
             value: 'dashed',
-            text: '虚线',
-          },
-        ],
+            text: '虚线'
+          }
+        ]
       }),
       createPannelOptions<FormMap, 'boxShadow'>('boxShadow', {
         receive: 'boxShadowData',
@@ -115,17 +110,17 @@ const MButton = new ComponentItemFactory(
           xOffset: 2,
           yOffset: 2,
           blurRadius: 4,
-          color: 'rgba(82,113,237,1)',
-        },
-      }),
+          color: 'rgba(82,113,237,1)'
+        }
+      })
     ]
   },
   {
     props: {
       text: '主要按钮',
-      size:'normal',
-      type:'primary',
-      color:'#7232dd',
+      size: 'normal',
+      type: 'primary',
+      color: '#7232dd',
 
       sizeData: [100, 30],
       backgroundColor: 'rgba(0,132,255,1)',
@@ -134,32 +129,27 @@ const MButton = new ComponentItemFactory(
       borderData: {
         borderWidth: 0,
         borderColor: 'rgba(0,0,0,1)',
-        borderStyle: 'solid',
+        borderStyle: 'solid'
       },
       fontData: {
         fontSize: 14,
         textDecoration: 'none',
         fontStyle: 'normal',
         color: 'rgba(255,255,255,1)',
-        fontWeight: 'normal',
+        fontWeight: 'normal'
       },
       boxShadowData: {
         xOffset: 0,
         yOffset: 0,
         blurRadius: 4,
-        color: 'rgba(255,255,255,0)',
-      },
-    },
+        color: 'rgba(255,255,255,0)'
+      }
+    }
   },
   (data, context) => {
-    return (
-      <ButtonTemp
-        data={data}
-        context={context}
-      ></ButtonTemp>
-    );
+    return <ButtonTemp data={data} context={context}></ButtonTemp>
   },
   true
-);
+)
 
-export default MButton;
+export default MButton

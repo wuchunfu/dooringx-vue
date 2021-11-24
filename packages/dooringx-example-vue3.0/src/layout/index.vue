@@ -7,13 +7,13 @@
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/layout/index.vue
 -->
 <template>
-  <el-container  @mouseup="onMouseUp" >
+  <el-container @mouseup="onMouseUp">
     <el-header height="80px" class="flex items-center shadow-md">
-           <Header />
+      <Header />
     </el-header>
     <el-container class="layout-container">
       <el-aside class="shadow-sm" width="380px">
-        <Left/>
+        <Left />
       </el-aside>
       <el-main>
         <container-wrapper :config="config">
@@ -25,12 +25,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed, toRefs, ref, watchEffect,inject } from 'vue'
+import { defineComponent, reactive, computed, toRefs, ref, watchEffect, inject } from 'vue'
 
 import Left from '../components/Left/index'
 import Header from '../components/Header/index.vue'
 import ContainerWrapper from '../components/ContainerWrapper/index'
-import { injectKey,UserConfig,innerContainerDragUp ,useStoreState} from '@dooring/dooringx-vue-lib';
+import { injectKey, UserConfig, innerContainerDragUp, useStoreState } from '@dooring/dooringx-vue-lib'
 import Container from '../components/container'
 export default defineComponent({
   name: 'Layout',
@@ -41,20 +41,19 @@ export default defineComponent({
     Container
   },
   setup() {
+    const config: UserConfig = inject(injectKey)
+    const state = reactive({
+      config
+    })
 
-  const config:UserConfig = inject(injectKey)
-  const state=reactive({
-    config
-  })
-
-   // const [storeState]=useStoreState(defaultConfig.value);
+    // const [storeState]=useStoreState(defaultConfig.value);
     // state.value=storeState
-    const storeState=ref();
-    watchEffect(()=>{
-     storeState.value=useStoreState(state.config);
-    });
+    const storeState = ref()
+    watchEffect(() => {
+      storeState.value = useStoreState(state.config)
+    })
 
-  const {onMouseUp} =innerContainerDragUp(state.config)
+    const { onMouseUp } = innerContainerDragUp(state.config)
     return {
       ...toRefs(state),
       onMouseUp,

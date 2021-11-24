@@ -6,10 +6,10 @@
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/focusHandler/state.ts
  */
-import { IBlockType } from '../store/storetypes';
+import { IBlockType } from '../store/storetypes'
 export interface FocusStateType {
-	blocks: IBlockType[];
+  blocks: IBlockType[]
 }
 export const focusState: FocusStateType = {
-	blocks: [],
-};
+  blocks: []
+}
