@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-17 13:56:33
- * @LastEditTime: 2021-11-23 17:27:23
+ * @LastEditTime: 2021-11-24 14:27:42
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/crossDrag/index.ts
@@ -46,10 +46,18 @@ export const dragEventResolve = function (item: LeftRegistComponentMapItem,) {
 export const containerDragResolve = (config: UserConfig) => {
   const store = config.getStore();
 	return {
+    onDragenter:(e)=>{
+      // enter 添加一个移动标识
+      e.dataTransfer.dropEffect='move';
+    },
 		onDragstart: () => {},
 		onDragover: (e: DragEvent) => {
 			e.preventDefault();
-		},
+    },
+    onDrangleave:(e)=>{
+      e.dataTransfer.dropEffect='none';
+
+    },
 		onDrop: (e: DragEvent) => {
       const componentRegister = config.getComponentRegister();
 			const offsetX = Math.round(e.offsetX);

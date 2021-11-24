@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-22 16:19:20
- * @LastEditTime: 2021-11-23 16:04:01
+ * @LastEditTime: 2021-11-24 11:29:07
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/focusHandler/index.ts
@@ -74,5 +74,3 @@ export function containerFocusRemove(config: UserConfig) {
 		onMousedown,
 	};
 }
-
-
