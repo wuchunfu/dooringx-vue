@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-17 13:56:33
- * @LastEditTime: 2021-11-24 14:27:42
+ * @LastEditTime: 2021-11-24 15:32:56
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/crossDrag/index.ts
@@ -10,41 +10,41 @@
 import UserConfig from '../../config';
 import { IBlockType } from '../store/storetypes';
 import { createBlock } from '../components/createBlock';
-import {deepCopy} from '../utils/index'
+import { deepCopy } from '../utils/index'
 
- /**
- *
- * @export
- * @interface LeftRegistComponentMapItem
- * @img 图片地址
- * @urlFn 组件异步加载函数
- */
+/**
+*
+* @export
+* @interface LeftRegistComponentMapItem
+* @img 图片地址
+* @urlFn 组件异步加载函数
+*/
 export interface LeftRegistComponentMapItem {
-  type: string;
-  component: string;
-  img: string;
-  imgCustom?:any;
-  displayName: string;
-  urlFn?: () => Promise<any>;
+	type: string;
+	component: string;
+	img: string;
+	imgCustom?: any;
+	displayName: string;
+	urlFn?: () => Promise<any>;
 }
 
 let currentDrag: LeftRegistComponentMapItem | null = null;
 export const dragEventResolve = function (item: LeftRegistComponentMapItem,) {
 	return {
 		draggable: true,
-		onDragstart: (e?:Event) => {
-      currentDrag = item;
-    },
+		onDragstart: (e?: Event) => {
+			currentDrag = item;
+		},
 		onDragover: (e: DragEvent) => {
 			e.preventDefault();
 		},
-		onDrop: () => {},
-		onDragend: () => {},
+		onDrop: () => { },
+		onDragend: () => { },
 	};
 };
 
 export const containerDragResolve = (config: UserConfig) => {
-  const store = config.getStore();
+	const store = config.getStore();
 	return {
     onDragenter:(e)=>{
       // enter 添加一个移动标识
@@ -59,9 +59,10 @@ export const containerDragResolve = (config: UserConfig) => {
 
     },
 		onDrop: (e: DragEvent) => {
-      const componentRegister = config.getComponentRegister();
+			const componentRegister = config.getComponentRegister();
 			const offsetX = Math.round(e.offsetX);
-      const offestY = Math.round(e.offsetY);
+			const offestY = Math.round(e.offsetY);
+
 			//drop后修改store，
 			if (currentDrag) {
 				// 还需要拿到注册的组件状态
@@ -86,11 +87,11 @@ export const containerDragResolve = (config: UserConfig) => {
 					}
 				}
 				const data = deepCopy(store.getData());
-        data.block.push(newblock);
+				data.block.push(newblock);
 				store.setData({ ...data });
 			}
 			currentDrag = null;
 		},
-		onDragend: () => {},
+		onDragend: () => { },
 	};
 };
