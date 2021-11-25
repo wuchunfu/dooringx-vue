@@ -1,5 +1,5 @@
-import settingStateTypes from './modules/Setting/types';
-import appStateTypes from './modules/app/types';
+import settingStateTypes from './modules/Setting/types'
+import appStateTypes from './modules/app/types'
 
 export default interface RootStateTypes {
   count: Number
@@ -7,6 +7,6 @@ export default interface RootStateTypes {
 }
 
 export interface AllStateTypes extends RootStateTypes {
-  settingsModule: settingStateTypes,
+  settingsModule: settingStateTypes
   appModule: appStateTypes
 }

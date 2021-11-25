@@ -18,14 +18,14 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 
-import { defineComponent, computed,provide } from 'vue'
+import { defineComponent, computed, provide } from 'vue'
 import { ElConfigProvider } from 'element-plus'
 import zhLocale from 'element-plus/lib/locale/lang/zh-cn'
 import enLocale from 'element-plus/lib/locale/lang/en'
 import './assets/icons/iconfont/iconfont.js'
-import {defaultConfig} from './plugin/index'  // for test
-import { UserConfig,injectKey } from '@dooring/dooringx-vue-lib';
-export const config:UserConfig = new UserConfig(defaultConfig);
+import { defaultConfig } from './plugin/index' // for test
+import { UserConfig, injectKey } from '@dooring/dooringx-vue-lib'
+export const config: UserConfig = new UserConfig(defaultConfig)
 
 export default defineComponent({
   name: 'App',
@@ -34,13 +34,12 @@ export default defineComponent({
   },
   setup() {
     console.log(config)
-  // 注入可视化编辑器配置数据
-  provide(injectKey, config)
+    // 注入可视化编辑器配置数据
+    provide(injectKey, config)
 
     return {}
   }
 })
-
 </script>
 
 <style>

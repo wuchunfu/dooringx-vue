@@ -6,19 +6,33 @@
     "@commitlint/config-conventional": "^14.1.0",
     "eslint": "^7.32.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.4",
+    "husky": "^4.2.5",
     "lerna": "^4.0.0",
+    "lint-staged": "^10.2.2",
     "prettier": "^2.4.0"
   },
   "scripts": {
     "test": "jest",
     "lint": "eslint --ext .js  packages/**/*.js --no-error-on-unmatched-pattern --fix",
     "start:example": "lerna exec yarn run dev --scope=dooringx-example-vue3.0",
-    "build": "lerna exec yarn run build --scope=dooringx-example-vue3.0"
+    "build": "lerna exec yarn run build --scope=dooringx-example-vue3.0",
+    "format": "yarn prettier --write",
+    "prettier": "prettier --ignore-path .gitignore --write \"packages/*/+(src|__tests__)/**/*.+(ts|tsx|vue)\""
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-customizable"
+    }
+  },
+  "lint-staged": {
+    "packages/**/*.{ts,tsx,vue}": [
+      "yarn format",
+      "git add ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
   },
   "workspaces": [

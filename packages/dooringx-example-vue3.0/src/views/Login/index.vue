@@ -1,9 +1,5 @@
 <template>
-    <div>login</div>
+  <div>login</div>
 </template>
-<script lang="ts">
-
-</script>
-<style lang="less" scoped>
-
-</style>
+<script lang="ts"></script>
+<style lang="less" scoped></style>

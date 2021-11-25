@@ -7,11 +7,11 @@
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/hooks/index.ts
  */
 
-import UserConfig from '../config';
-import {reactive} from 'vue'
+import UserConfig from '../config'
+import { reactive } from 'vue'
 
- export function useStoreState(config: UserConfig,){
-  const store = config.getStore();
-  const state=reactive(store.getData());
+export function useStoreState(config: UserConfig) {
+  const store = config.getStore()
+  const state = reactive(store.getData())
   return state
- }
+}

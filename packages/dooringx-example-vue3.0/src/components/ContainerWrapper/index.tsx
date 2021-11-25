@@ -6,40 +6,38 @@
  * @Description: 负责包裹容器的事件监听以及  鼠标事件的处理；
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/containerWrapper/index.tsx
  */
-import { defineComponent,computed,renderSlot, useSlots,ref  } from 'vue'
-import { wrapperEvent,UserConfig } from "@dooring/dooringx-vue-lib";
+import { defineComponent, computed, renderSlot, useSlots, ref } from 'vue'
+import { wrapperEvent, UserConfig } from '@dooring/dooringx-vue-lib'
 
 export default defineComponent({
   name: 'ContainerWrapper',
-  props:{
-    config:{type:UserConfig},
+  props: {
+    config: { type: UserConfig }
   },
   setup(props) {
-    const slots=useSlots();
-    const wrapperRef = ref(null);
-    console.log("config",props.config);
+    const slots = useSlots()
+    const wrapperRef = ref(null)
+    console.log('config', props.config)
     // 渲染动态blocks
-    const defaulgConfig=computed(()=>{
+    const defaulgConfig = computed(() => {
       return props.config
     })
-    return ()=>(
+    return () => (
       <>
         <div
           ref={wrapperRef}
-        style={{
-          backgroundColor: '#f0f0f0',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flex: 1,
-          position: 'relative',
-          overflow: 'hidden',
-          userSelect: 'none',
-
-        }}
-
-        {...wrapperEvent(wrapperRef.value, defaulgConfig.value)}
+          style={{
+            backgroundColor: '#f0f0f0',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 1,
+            position: 'relative',
+            overflow: 'hidden',
+            userSelect: 'none'
+          }}
+          {...wrapperEvent(wrapperRef.value, defaulgConfig.value)}
         >
           {renderSlot(slots, 'default')}
         </div>
@@ -47,6 +45,3 @@ export default defineComponent({
     )
   }
 })
-
-
-

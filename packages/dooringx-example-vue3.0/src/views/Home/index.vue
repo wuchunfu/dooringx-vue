@@ -1,11 +1,6 @@
 <template>
-    <div>test home page</div>
+  <div>test home page</div>
 </template>
-<script lang="ts">
+<script lang="ts"></script>
 
-
-</script>
-
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>
