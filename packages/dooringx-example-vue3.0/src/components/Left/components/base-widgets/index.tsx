@@ -7,7 +7,7 @@
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/Left/components/base-widgets/index.tsx
  */
 
-import { defineComponent,ref} from 'vue'
+import { defineComponent, ref } from 'vue'
 import { cloneDeep } from 'lodash'
 import { visualConfig } from '@/visual.config'
 import styles from './index.module.scss'
@@ -33,14 +33,7 @@ export default defineComponent({
 
     return () => (
       <>
-        <DraggableTransitionGroup
-          class={styles.listGroup}
-          v-model={baseWidgets.value}
-          group={{ name: 'components', pull: 'clone', put: false }}
-          clone={cloneDog}
-          onChange={log}
-          itemKey={'key'}
-        >
+        <DraggableTransitionGroup class={styles.listGroup} v-model={baseWidgets.value} group={{ name: 'components', pull: 'clone', put: false }} clone={cloneDog} onChange={log} itemKey={'key'}>
           {{
             item: ({ element }) => (
               <div class={styles.listGroupItem} data-label={element.label}>

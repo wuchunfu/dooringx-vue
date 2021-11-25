@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-16 17:52:10
- * @LastEditTime: 2021-11-25 15:58:53
+ * @LastEditTime: 2021-11-25 18:08:53
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/config/index.tsx
@@ -24,10 +24,10 @@ import { StoreChanger } from '../core/storeChanger';
  * @interface CacheComponentValueType
  */
 export interface CacheComponentValueType {
-	component?: ComponentItemFactory;
+  component?: ComponentItemFactory
 }
-export type CacheComponentType = Record<string, CacheComponentValueType> | {};
-export type AsyncCacheComponentType = Record<string, () => Promise<any>>;
+export type CacheComponentType = Record<string, CacheComponentValueType> | {}
+export type AsyncCacheComponentType = Record<string, () => Promise<any>>
 
 /**
  *
@@ -36,11 +36,11 @@ export type AsyncCacheComponentType = Record<string, () => Promise<any>>;
  * @interface LeftMapRenderListPropsItemCategory
  */
 export interface LeftMapRenderListPropsItemCategory {
-	type: string;
-	icon: any;
-	custom?: boolean;
-	customRender?: any;
-	displayName?: string;
+  type: string
+  icon: any
+  custom?: boolean
+  customRender?: any
+  displayName?: string
 }
 
 /**
@@ -59,22 +59,22 @@ export interface RightMapRenderListPropsItemCategory {
 
 
 export const defaultStore: IStoreData = {
-	container: {
-		width: 375,
-		height: 667,
-	},
-	block: [],
-	modalMap: {},
-	dataSource: {
-		defaultKey: 'defaultValue',
-	},
-	globalState: {
-		containerColor: 'rgba(255,255,255,1)',
-		title: 'dooring',
-		bodyColor: 'rgba(255,255,255,1)',
-	},
-	modalConfig: {},
-};
+  container: {
+    width: 375,
+    height: 667
+  },
+  block: [],
+  modalMap: {},
+  dataSource: {
+    defaultKey: 'defaultValue'
+  },
+  globalState: {
+    containerColor: 'rgba(255,255,255,1)',
+    title: 'dooring',
+    bodyColor: 'rgba(255,255,255,1)'
+  },
+  modalConfig: {}
+}
 
 // 设置部分
 export interface InitConfig {
@@ -447,4 +447,4 @@ export class UserConfig {
 	// }
 }
 
-export default UserConfig;
+export default UserConfig

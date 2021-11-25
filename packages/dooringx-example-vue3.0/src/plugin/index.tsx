@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-16 21:38:15
- * @LastEditTime: 2021-11-25 13:43:19
+ * @LastEditTime: 2021-11-25 21:20:53
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/plugin/index.tsx
@@ -33,8 +33,8 @@ const LeftRegistMap: LeftRegistComponentMapItem[] = [
     displayName: '二维码',
     urlFn: () => import('./regist-components/button'),
   },
-   // 媒体组件
-   {
+  // 媒体组件
+  {
     type: 'media',
     component: 'videoCo',
     img: 'icon-shipin-',
@@ -64,27 +64,25 @@ const LeftRegistMap: LeftRegistComponentMapItem[] = [
     urlFn: () => import('./regist-components/button'),
   },
 
-];
-
- // 用于config类型定义
- export const defaultConfig:Partial<InitConfig>={
+// 用于config类型定义
+export const defaultConfig: Partial<InitConfig> = {
   leftAllRegistMap: LeftRegistMap,
-  leftRenderListCategory:[
+  leftRenderListCategory: [
     {
-			type: 'basic',
-			icon: 'icon-biaoge',
-			displayName: '基础组件',
+      type: 'basic',
+      icon: 'icon-biaoge',
+      displayName: '基础组件'
     },
     {
       type: 'media',
       icon: 'icon-shipin',
-      displayName: '媒体',
+      displayName: '媒体'
     },
     {
       type: 'visual',
       icon: 'icon-bingzhuangtu',
-      displayName: '可视化',
-    },
+      displayName: '可视化'
+    }
   ],
   rightRenderListCategory: [
     {
@@ -107,5 +105,5 @@ const LeftRegistMap: LeftRegistComponentMapItem[] = [
   ],
   initComponentCache: {
     button: { component: Button }
-  },
- }
+  }
+}

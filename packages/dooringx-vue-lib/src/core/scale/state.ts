@@ -7,9 +7,8 @@
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/scale/state.ts
  */
 
-
 export const scaleState = {
-	value: 0.8,
-	maxValue: 1.3,
-	minValue: 0.4,
-};
+  value: 0.8,
+  maxValue: 1.3,
+  minValue: 0.4
+}

@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-22 15:58:34
- * @LastEditTime: 2021-11-24 13:50:21
+ * @LastEditTime: 2021-11-25 21:24:14
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/innerDrag/index.ts
@@ -19,16 +19,13 @@ import { selectData,selectRangeMouseMove } from "../selectRange";
 /**
  * @description 获取焦点,记录当前选中元素startX/Y,
  *
-*/
-export const innerDrag = function (item: IBlockType,config: UserConfig,ref: HTMLDivElement) {
-  const store = config.getStore();
+ */
+export const innerDrag = function (item: IBlockType, config: UserConfig, ref: HTMLDivElement) {
+  const store = config.getStore()
 
-	return {
-
-    onMousedown: (e: MouseEvent,) => {
-
-      e.stopPropagation();
-
+  return {
+    onMousedown: (e: MouseEvent) => {
+      e.stopPropagation()
 
 			// 特殊元素不可操作 modalMask
 			if (specialCoList.includes(item.name)) {
@@ -37,14 +34,14 @@ export const innerDrag = function (item: IBlockType,config: UserConfig,ref: HTML
       }
 
       // 暂时屏蔽右键菜单；
-			// if (item.id && innerDragState.lastClick && item.id !== innerDragState.lastClick.id) {
-			// 	contextMenuState.unmountContextMenu();
+      // if (item.id && innerDragState.lastClick && item.id !== innerDragState.lastClick.id) {
+      // 	contextMenuState.unmountContextMenu();
       // }
 
-			//candrag给选中，不给拖
-			blockFocus(e, item, config);
-			if (!item.canDrag) {
-				return;
+      //candrag给选中，不给拖
+      blockFocus(e, item, config)
+      if (!item.canDrag) {
+        return
       }
       // 记录画布内最后点击的元素；
 			innerDragState.lastClick = item;
@@ -53,34 +50,34 @@ export const innerDrag = function (item: IBlockType,config: UserConfig,ref: HTML
 				return;
       }
 
-			if (ref) {
-				ref.style.cursor = 'move';
-				ref.style.willChange = 'left,right,width,height';
-			}
-			innerDragState.startX = Math.round(e.clientX);
-			innerDragState.startY = Math.round(e.clientY);
-			innerDragState.item = item;
-			innerDragState.isDrag = true;
-			innerDragState.ref = ref;
-      innerDragState.current = store.getIndex();
-		},
-	};
-};
+      if (ref) {
+        ref.style.cursor = 'move'
+        ref.style.willChange = 'left,right,width,height'
+      }
+      innerDragState.startX = Math.round(e.clientX)
+      innerDragState.startY = Math.round(e.clientY)
+      innerDragState.item = item
+      innerDragState.isDrag = true
+      innerDragState.ref = ref
+      innerDragState.current = store.getIndex()
+    }
+  }
+}
 
 /**
  *
  * @description  画布container容器监听Mousemove事件，更新当前选中blocks的left,top属性；并记录移动block的startX,startY;
  *
-*/
+ */
 export const innerContainerDrag = function (config: UserConfig) {
-	let lastblock: null | IBlockType;
-	const store = config.getStore();
-	const scaleState = config.getScaleState();  //获取当前缩放value;
-	const onMousemove = (e: MouseEvent) => {
+  let lastblock: null | IBlockType
+  const store = config.getStore()
+  const scaleState = config.getScaleState() //获取当前缩放value;
+  const onMousemove = (e: MouseEvent) => {
     // 右键菜单
-		// if (isMac() && contextMenuState.state) {
-		// 	//mac有bug
-		// 	return;
+    // if (isMac() && contextMenuState.state) {
+    // 	//mac有bug
+    // 	return;
     // }
 		const id = innerDragState.item?.id;
 		if (id && innerDragState.isDrag) {
@@ -105,7 +102,7 @@ export const innerContainerDrag = function (config: UserConfig) {
             v.top = Math.round(v.top + durY);
 					}
 					return v;
-				});
+				});ß
 			} else {
          // 改变focus block的 left  top属性；
 				newblock = store.getData().block.map((v) => {
@@ -135,33 +132,33 @@ export const innerContainerDrag = function (config: UserConfig) {
  *
  * @description  画布容器中鼠标up时释放
  *
-*/
+ */
 export const innerContainerDragUp = function (config: UserConfig) {
-	const store = config.getStore();
-	const onMouseUp = (e:MouseEvent) => {
-		// e.preventDefault(); 这个会导致无法取消选中
-		// iframeWrapperMove(config);
-		wrapperMoveMouseUp(config);
-		// selectRangeMouseUp(e, config);
-		if (innerDragState.ref && innerDragState.ref) {
-			innerDragState.ref.style.cursor = 'default';
-			innerDragState.ref.style.willChange = 'auto';
-		}
-		// resizerMouseUp(config);
-		// rotateMouseUp(config);
-		if (innerDragState.current) {
-			const endindex = store.getIndex();
-			store.getStoreList().splice(innerDragState.current, endindex - innerDragState.current);
-			store.setIndex(innerDragState.current);
-		}
-		innerDragState.ref = null;
-		innerDragState.isDrag = false;
-		innerDragState.item = null;
-		innerDragState.current = 0;
-		// marklineConfig.marklineUnfocus = null;
-		store.forceupdate();
-	};
-	return {
-		onMouseUp,
-	};
-};
+  const store = config.getStore()
+  const onMouseUp = (e: MouseEvent) => {
+    // e.preventDefault(); 这个会导致无法取消选中
+    // iframeWrapperMove(config);
+    wrapperMoveMouseUp(config)
+    // selectRangeMouseUp(e, config);
+    if (innerDragState.ref && innerDragState.ref) {
+      innerDragState.ref.style.cursor = 'default'
+      innerDragState.ref.style.willChange = 'auto'
+    }
+    // resizerMouseUp(config);
+    // rotateMouseUp(config);
+    if (innerDragState.current) {
+      const endindex = store.getIndex()
+      store.getStoreList().splice(innerDragState.current, endindex - innerDragState.current)
+      store.setIndex(innerDragState.current)
+    }
+    innerDragState.ref = null
+    innerDragState.isDrag = false
+    innerDragState.item = null
+    innerDragState.current = 0
+    // marklineConfig.marklineUnfocus = null;
+    store.forceupdate()
+  }
+  return {
+    onMouseUp
+  }
+}

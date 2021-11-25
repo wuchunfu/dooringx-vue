@@ -1,13 +1,13 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-19 16:23:09
- * @LastEditTime: 2021-11-25 17:03:42
+ * @LastEditTime: 2021-11-25 21:22:14
  * @LastEditors: GeekQiaQia
  * @Description: 画布组件用来展示画布
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/container.tsx
  */
 
-import { defineComponent,computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 import Blocks from './blocks'
 import { containerResizer,wrapperMoveState,UserConfig} from '@dooring/dooringx-vue-lib';
 import {containerDragResolve,innerContainerDrag,containerFocusRemove} from '@dooring/dooringx-vue-lib'
@@ -15,12 +15,12 @@ import VerticalAllignMiddle from './icons/vertical-allign-middle.vue'
 import './index.scss'
 export default defineComponent({
   name: 'ContainerWrapper',
-  props:{
-    storeState:{type:Object},
-    config:{type:UserConfig},
-    context:{type:String}
+  props: {
+    storeState: { type: Object },
+    config: { type: UserConfig },
+    context: { type: String }
   },
-  components:{
+  components: {
     Blocks,
     VerticalAllignMiddle
   },
@@ -29,9 +29,9 @@ export default defineComponent({
       return props.config
     })
 
-	  const scaleState = defaultConfig.value.getScaleState();
+    const scaleState = defaultConfig.value.getScaleState()
 
-    const state=computed(()=>{
+    const state = computed(() => {
       return props.storeState
     })
 
@@ -131,4 +131,3 @@ export default defineComponent({
     )
   }
 })
-
