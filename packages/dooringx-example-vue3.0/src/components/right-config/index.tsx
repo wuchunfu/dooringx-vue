@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-24 17:32:06
- * @LastEditTime: 2021-11-25 17:44:42
+ * @LastEditTime: 2021-11-25 21:31:11
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/right-config/index.tsx
@@ -21,8 +21,6 @@ export default defineComponent({
   setup(props) {
 
     const config:UserConfig = inject(injectKey)
-
-
      // 从用户注册的config中获取所有注册的组件map；
      const configCategory=computed(()=>{
       return config.getConfig().rightRenderListCategory

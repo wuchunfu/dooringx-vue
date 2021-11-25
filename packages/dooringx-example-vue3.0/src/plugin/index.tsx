@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-16 21:38:15
- * @LastEditTime: 2021-11-25 21:20:53
+ * @LastEditTime: 2021-11-25 21:41:38
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/plugin/index.tsx
@@ -62,8 +62,8 @@ const LeftRegistMap: LeftRegistComponentMapItem[] = [
     img: 'icon-mianjitu',
     displayName: '面积图组件',
     urlFn: () => import('./regist-components/button'),
-  },
-
+  }
+]
 // 用于config类型定义
 export const defaultConfig: Partial<InitConfig> = {
   leftAllRegistMap: LeftRegistMap,
