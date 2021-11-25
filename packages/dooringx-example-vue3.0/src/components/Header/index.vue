@@ -1,7 +1,9 @@
 <template>
   <el-row type="flex" class="header">
     <!--    左侧logo start-->
-    <el-col :span="6" class="flex items-center"> </el-col>
+    <el-col :span="6" class="flex items-center">
+          <img :src="Logo" style="width:120px" alt="H5-DooringX | 一款强大的H5页面编辑器" />
+    </el-col>
     <!--    左侧logo end-->
     <!--    中间操作页面部分 start-->
     <el-col class="flex items-center" :span="12"> </el-col>
@@ -38,6 +40,7 @@
 import { defineComponent, reactive, toRefs } from 'vue'
 import GithubIcon from '../icons/github.vue'
 import GiteeIcon from '../icons/gitee.vue'
+import Logo from '../../assets/dooringx.svg';
 
 export default defineComponent({
   name: 'Header',
@@ -48,7 +51,8 @@ export default defineComponent({
     })
 
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      Logo
     }
   }
 })

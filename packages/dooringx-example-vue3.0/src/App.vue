@@ -1,7 +1,7 @@
 <!--
  * @Author: GeekQiaQia
  * @Date: 2021-11-09 16:07:18
- * @LastEditTime: 2021-11-23 15:01:18
+ * @LastEditTime: 2021-11-25 18:06:59
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/App.vue
@@ -33,9 +33,8 @@ export default defineComponent({
     ElConfigProvider
   },
   setup() {
-    console.log(config)
-    // 注入可视化编辑器配置数据
-    provide(injectKey, config)
+  // 注入可视化编辑器配置
+  provide(injectKey, config)
 
     return {}
   }

@@ -1,7 +1,7 @@
 <!--
  * @Author: GeekQiaQia
  * @Date: 2021-11-15 17:03:49
- * @LastEditTime: 2021-11-19 15:21:51
+ * @LastEditTime: 2021-11-25 17:20:47
  * @LastEditors: GeekQiaQia
  * @Description: 
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/devnote.md
@@ -41,3 +41,12 @@ npm link
 lerna link
 
 ```
+
+### 开发规范
+#### 文件命名和组件命名统一使用中划线 `-`
+
+
+
+### ElementPlus
+
+el-color-picker  样式污染

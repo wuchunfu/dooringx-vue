@@ -1,10 +1,10 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-17 00:10:16
- * @LastEditTime: 2021-11-23 17:37:07
+ * @LastEditTime: 2021-11-25 21:22:28
  * @LastEditors: GeekQiaQia
  * @Description: 负责包裹容器的事件监听以及  鼠标事件的处理；
- * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/containerWrapper/index.tsx
+ * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/components/container-wrapper/index.tsx
  */
 import { defineComponent, computed, renderSlot, useSlots, ref } from 'vue'
 import { wrapperEvent, UserConfig } from '@dooring/dooringx-vue-lib'
@@ -15,9 +15,8 @@ export default defineComponent({
     config: { type: UserConfig }
   },
   setup(props) {
-    const slots = useSlots()
-    const wrapperRef = ref(null)
-    console.log('config', props.config)
+    const slots=useSlots();
+    const wrapperRef = ref(null);
     // 渲染动态blocks
     const defaulgConfig = computed(() => {
       return props.config
@@ -35,9 +34,11 @@ export default defineComponent({
             flex: 1,
             position: 'relative',
             overflow: 'hidden',
-            userSelect: 'none'
+            userSelect: 'none',
+
           }}
-          {...wrapperEvent(wrapperRef.value, defaulgConfig.value)}
+
+        {...wrapperEvent(wrapperRef.value, defaulgConfig.value)}
         >
           {renderSlot(slots, 'default')}
         </div>

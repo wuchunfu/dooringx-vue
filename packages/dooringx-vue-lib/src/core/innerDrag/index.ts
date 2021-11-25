@@ -1,21 +1,23 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-22 15:58:34
- * @LastEditTime: 2021-11-23 16:39:48
+ * @LastEditTime: 2021-11-25 21:24:14
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/innerDrag/index.ts
  */
 
-import UserConfig from '../../config'
-import { IBlockType } from '../store/storetypes'
-import { innerDragState } from './state'
-import { blockFocus } from '../focusHandler/index'
-import { deepCopy, isMac } from '../utils'
-import { wrapperMoveMouseUp } from '../wrapperMove/index'
-
+import UserConfig from '../../config';
+import { IBlockType } from '../store/storetypes';
+import { innerDragState} from "./state";
+import { blockFocus } from "../focusHandler/index";
+import { deepCopy,isMac } from '../utils';
+import { wrapperMoveMouseUp } from "../wrapperMove/index";
+import { containerFocusRemove } from "../focusHandler/index";
+import {  specialCoList} from '../utils/special';
+import { selectData,selectRangeMouseMove } from "../selectRange";
 /**
- * @description 获取焦点
+ * @description 获取焦点,记录当前选中元素startX/Y,
  *
  */
 export const innerDrag = function (item: IBlockType, config: UserConfig, ref: HTMLDivElement) {
@@ -25,11 +27,11 @@ export const innerDrag = function (item: IBlockType, config: UserConfig, ref: HT
     onMousedown: (e: MouseEvent) => {
       e.stopPropagation()
 
-      //特殊元素不可操作
-      // if (specialCoList.includes(item.name)) {
-      // 	containerFocusRemove(config).onMouseDown(e);
-      // 	return;
-      // }
+			// 特殊元素不可操作 modalMask
+			if (specialCoList.includes(item.name)) {
+				containerFocusRemove(config).onMousedown(e);
+				return;
+      }
 
       // 暂时屏蔽右键菜单；
       // if (item.id && innerDragState.lastClick && item.id !== innerDragState.lastClick.id) {
@@ -42,10 +44,10 @@ export const innerDrag = function (item: IBlockType, config: UserConfig, ref: HT
         return
       }
       // 记录画布内最后点击的元素；
-      innerDragState.lastClick = item
-      // 非可移动组件
-      if (item.position === 'static') {
-        return
+			innerDragState.lastClick = item;
+      // position static 为非可移动组件
+			if (item.position === 'static') {
+				return;
       }
 
       if (ref) {
@@ -77,55 +79,54 @@ export const innerContainerDrag = function (config: UserConfig) {
     // 	//mac有bug
     // 	return;
     // }
-
-    const id = innerDragState.item?.id
-    if (id && innerDragState.isDrag) {
-      const current = store.getData().block.find((v) => v.id === id)
-      if (current?.position === 'static') {
-        return
+		const id = innerDragState.item?.id;
+		if (id && innerDragState.isDrag) {
+			const current = store.getData().block.find((v) => v.id === id);
+			if (current?.position === 'static') {
+				return;
       }
 
-      let { clientX: moveX, clientY: moveY } = e
-      const { startX, startY } = innerDragState
-      const scale = scaleState.value
+			let { clientX: moveX, clientY: moveY } = e;
+			const { startX, startY } = innerDragState;
+      const scale = scaleState.value;
 
-      let durX = Math.round((moveX - startX) / scale)
-      let durY = Math.round((moveY - startY) / scale)
-
-      let newblock: IBlockType[]
-      if (lastblock !== innerDragState.item) {
-        const cloneblock: IBlockType[] = deepCopy(store.getData().block)
-        lastblock = innerDragState.item
-        newblock = cloneblock.map((v) => {
-          if (v.focus && v.position !== 'static') {
-            v.left = Math.round(v.left + durX)
-            v.top = Math.round(v.top + durY)
-          }
-          return v
-        })
-      } else {
-        newblock = store.getData().block.map((v) => {
-          if (v.focus && v.position !== 'static') {
-            v.left = Math.round(v.left + durX)
-            v.top = Math.round(v.top + durY)
-          }
-          return v
-        })
-      }
-      store.setData({ ...store.getData(), block: newblock })
-      innerDragState.startX = moveX
-      innerDragState.startY = moveY
-    }
-    // resizerMouseMove(e, config);  // 暂时不考虑resize
-    // rotateMouseMove(e, config);  // 暂时不考虑 rotate;
-    // if (selectData.selectDiv) {
-    // 	selectRangeMouseMove(e);
-    // }
-  }
-  return {
-    onMousemove
-  }
-}
+      let durX = Math.round((moveX - startX) / scale);
+      let durY = Math.round((moveY - startY) / scale);
+			let newblock: IBlockType[];
+			if (lastblock !== innerDragState.item) {
+				const cloneblock: IBlockType[] = deepCopy(store.getData().block);
+				lastblock = innerDragState.item;
+				newblock = cloneblock.map((v) => {
+					if (v.focus && v.position !== 'static') {
+						v.left = Math.round(v.left + durX);
+            v.top = Math.round(v.top + durY);
+					}
+					return v;
+				});ß
+			} else {
+         // 改变focus block的 left  top属性；
+				newblock = store.getData().block.map((v) => {
+					if (v.focus && v.position !== 'static') {
+						v.left = Math.round(v.left + durX);
+						v.top = Math.round(v.top + durY);
+					}
+					return v;
+				});
+			}
+			store.setData({ ...store.getData(), block: newblock });
+			innerDragState.startX = moveX;
+			innerDragState.startY = moveY;
+		}
+		// resizerMouseMove(e, config);  // 暂时不考虑resize
+		// rotateMouseMove(e, config);  // 暂时不考虑 rotate;
+		if (selectData.selectDiv) {
+			selectRangeMouseMove(e);
+		}
+	};
+	return {
+		onMousemove,
+	};
+};
 
 /**
  *
