@@ -1,7 +1,7 @@
 <!--
  * @Author: GeekQiaQia
  * @Date: 2021-11-11 16:29:01
- * @LastEditTime: 2021-11-23 18:03:41
+ * @LastEditTime: 2021-11-25 15:44:52
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-example-vue3.0/src/layout/index.vue
@@ -20,6 +20,9 @@
           <Container :store-state="storeState" :config="config" context="edit"></Container>
         </container-wrapper>
       </el-main>
+      <el-aside class="shadow-sm" width="380px">
+        <RightConfig :store-state="storeState"  :config="config"></RightConfig>
+      </el-aside>
     </el-container>
   </el-container>
 </template>
@@ -27,9 +30,10 @@
 <script lang="ts">
 import { defineComponent, reactive, computed, toRefs, ref, watchEffect,inject } from 'vue'
 
-import Left from '../components/Left/index'
-import Header from '../components/Header/index.vue'
-import ContainerWrapper from '../components/ContainerWrapper/index'
+import Left from '../components/left/index'
+import RightConfig from '../components/right-config/index'
+import Header from '../components/header/index'
+import ContainerWrapper from '../components/container-wrapper/index'
 import { injectKey,UserConfig,innerContainerDragUp ,useStoreState} from '@dooring/dooringx-vue-lib';
 import Container from '../components/container'
 export default defineComponent({
@@ -37,6 +41,7 @@ export default defineComponent({
   components: {
     Header,
     Left,
+    RightConfig,
     ContainerWrapper,
     Container
   },
@@ -49,7 +54,7 @@ export default defineComponent({
 
    // const [storeState]=useStoreState(defaultConfig.value);
     // state.value=storeState
-    const storeState=ref();
+    const storeState=ref(null);
     watchEffect(()=>{
      storeState.value=useStoreState(state.config);
     });

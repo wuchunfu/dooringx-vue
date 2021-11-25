@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-22 16:19:20
- * @LastEditTime: 2021-11-24 11:29:07
+ * @LastEditTime: 2021-11-24 17:06:53
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/core/focusHandler/index.ts
@@ -11,6 +11,8 @@ import UserConfig from "../../config";
 import { innerDragState } from '../innerDrag/state';
 import { IBlockType } from "../store/storeTypes";
 import { deepCopy } from "../utils";
+import { selectRangeMouseDown } from '../selectRange';
+
 
 /**
  *
@@ -65,9 +67,9 @@ export function containerFocusRemove(config: UserConfig) {
 		focusState.blocks = [];
     store.setData({ ...clonedata, block: newBlock });
      // 暂时屏蔽其他几种情况
-		// if (!innerDragState.item) {
-		// 	selectRangeMouseDown(e, config);
-		// }
+		if (!innerDragState.item) {
+			selectRangeMouseDown(e, config);
+		}
 		// unmountContextMenu();
 	};
 	return {

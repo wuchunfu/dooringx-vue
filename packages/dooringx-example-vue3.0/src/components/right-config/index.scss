@@ -1,0 +1,50 @@
+.rightConfig{
+  height: 100%;
+  contain: layout;
+
+
+  .el-tabs__header {
+    margin-right: 0;
+
+    .el-tabs__nav-wrap{
+      width: 100%;
+
+      .el-tabs__nav{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+    }
+  }
+
+
+  .el-tabs__item {
+    height: 50px;
+    padding: 5px 16px;
+    margin:5px 0px;
+  }
+  .tabItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    [class^='el-icon-'] {
+      font-size: 20px;
+    }
+  }
+
+
+ .el-tabs__content {
+    height: 100%;
+    overflow-y: auto;
+  }
+  .color-block{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+
+}

@@ -1,7 +1,7 @@
 /*
  * @Author: GeekQiaQia
  * @Date: 2021-11-16 17:52:10
- * @LastEditTime: 2021-11-23 13:23:22
+ * @LastEditTime: 2021-11-25 15:58:53
  * @LastEditors: GeekQiaQia
  * @Description:
  * @FilePath: /dooringx-vue/packages/dooringx-vue-lib/src/config/index.tsx
@@ -12,9 +12,9 @@ import { LeftRegistComponentMapItem } from '../core/crossDrag';
 import { IBlockType, IStoreData } from '../core/store/storeTypes';
 import { ComponentItemFactory } from '../core/components/abstract';
 import Store from '../core/store';
-import { reactive } from 'vue'
-import { focusState } from '../core/focusHandler/state'
+import {focusState} from '../core/focusHandler/state'
 import { scaleState } from '../core/scale/state';
+import { StoreChanger } from '../core/storeChanger';
 
 /**
  *
@@ -41,6 +41,20 @@ export interface LeftMapRenderListPropsItemCategory {
 	custom?: boolean;
 	customRender?: any;
 	displayName?: string;
+}
+
+/**
+ *
+ *
+ * @export 右侧的图标配置
+ * @interface RightMapRenderListPropsItemCategory
+ */
+export interface RightMapRenderListPropsItemCategory {
+	type: string;
+	icon?: any;
+  custom?: boolean;
+  displayName?: string;
+	customRender?: (type: string, current: IBlockType) => any;
 }
 
 
@@ -81,12 +95,18 @@ export interface InitConfig {
 	 * type icon custom customRender
 	 * @memberof InitConfig
 	 */
-	leftRenderListCategory: LeftMapRenderListPropsItemCategory[];
+  leftRenderListCategory: LeftMapRenderListPropsItemCategory[];
+  	/**
+	 * 右边tab页图标配置
+	 * type icon custom customRender
+	 * @memberof InitConfig
+	 */
+	rightRenderListCategory: RightMapRenderListPropsItemCategory[];
 
-	/**
-	   * 组件加载缓存判定，用来设置不异步加载的组件
-	   * @memberof InitConfig
-	   */
+  /**
+	 * 组件加载缓存判定，用来设置不异步加载的组件
+	 * @memberof InitConfig
+	 */
 	initComponentCache: CacheComponentType;
 
 	/**
@@ -94,15 +114,24 @@ export interface InitConfig {
 	 * 内置数据中心配置数据
 	 * @memberof InitConfig
 	 */
-	// initDataCenterMap: Record<string, any>;
+  // initDataCenterMap: Record<string, any>;
+
+  /**
+	 *
+	 * 容器拉伸图标
+	 * @type {}
+	 * @memberof InitConfig
+	 */
+	containerIcon?:any;
 
 }
 
 export const defaultConfig: InitConfig = {
 	initStoreData: [defaultStore],
 	leftAllRegistMap: [],
-	leftRenderListCategory: [],
-	initComponentCache: {},
+  leftRenderListCategory: [],
+  rightRenderListCategory: [],
+  initComponentCache: {},
 };
 
 
@@ -127,8 +156,9 @@ export function userConfigMerge(a: Partial<InitConfig>, b?: Partial<InitConfig>)
 	const mergeConfig: InitConfig = {
 		initStoreData: [defaultStore],
 		leftAllRegistMap: [],
-		leftRenderListCategory: [],
-		initComponentCache: {},
+    leftRenderListCategory: [],
+    rightRenderListCategory: [],
+    initComponentCache: {},
 	};
 	if (!b) {
 		return userConfigMerge(mergeConfig, a);
@@ -136,8 +166,8 @@ export function userConfigMerge(a: Partial<InitConfig>, b?: Partial<InitConfig>)
 	mergeConfig.initStoreData = b.initStoreData
 		? [...b.initStoreData]
 		: a.initStoreData
-			? [...a.initStoreData]
-			: [defaultStore];
+		? [...a.initStoreData]
+		: [defaultStore];
 
 
 	mergeConfig.leftAllRegistMap = b.leftAllRegistMap
@@ -145,20 +175,28 @@ export function userConfigMerge(a: Partial<InitConfig>, b?: Partial<InitConfig>)
 			? [...a.leftAllRegistMap, ...b.leftAllRegistMap]
 			: [...b.leftAllRegistMap]
 		: a.leftAllRegistMap
-			? [...a.leftAllRegistMap]
-			: [];
+		? [...a.leftAllRegistMap]
+		: [];
 	mergeConfig.leftRenderListCategory = b.leftRenderListCategory
 		? a.leftRenderListCategory
 			? [...a.leftRenderListCategory, ...b.leftRenderListCategory]
 			: [...b.leftRenderListCategory]
 		: a.leftRenderListCategory
-			? [...a.leftRenderListCategory]
-			: [...defaultConfig.leftRenderListCategory];
+		? [...a.leftRenderListCategory]
+    : [...defaultConfig.leftRenderListCategory];
 
-	mergeConfig.initComponentCache = {
-		...a.initComponentCache,
-		...b.initComponentCache,
-	};
+  mergeConfig.rightRenderListCategory = b.rightRenderListCategory
+		? a.rightRenderListCategory
+			? [...a.rightRenderListCategory, ...b.rightRenderListCategory]
+			: [...b.rightRenderListCategory]
+		: a.rightRenderListCategory
+		? [...a.rightRenderListCategory]
+    : [...defaultConfig.rightRenderListCategory];
+
+  mergeConfig.initComponentCache = {
+      ...a.initComponentCache,
+      ...b.initComponentCache,
+    };
 	return mergeConfig;
 }
 
@@ -170,9 +208,10 @@ export function userConfigMerge(a: Partial<InitConfig>, b?: Partial<InitConfig>)
  */
 export class UserConfig {
 	public initConfig: InitConfig;
-	public store = new Store();
+  public store = new Store();
 	public componentRegister = new ComponentRegister();
 	public scaleState = scaleState;
+	public storeChanger = new StoreChanger();
 
 	public componentCache = {};
 	public asyncComponentUrlMap = {} as AsyncCacheComponentType;
@@ -182,7 +221,7 @@ export class UserConfig {
 
 	constructor(initConfig?: Partial<InitConfig>) {
 		const mergeConfig = userConfigMerge(defaultConfig, initConfig);
-		this.initConfig = mergeConfig;
+    this.initConfig = mergeConfig;
 
 		// this.commanderRegister = new CommanderWrapper(this.store, {}, this);
 		// this.eventCenter = new EventCenter({}, mergeConfig.initFunctionMap);
@@ -190,7 +229,7 @@ export class UserConfig {
 		this.init();
 		// 右侧配置项注册 初始注册组件暂时固定
 	}
-	// 执行组件注册
+  // 执行组件注册
 	toRegist() {
 		// const modules = this.initConfig.initFormComponents;
 		// formComponentRegisterFn(this.formRegister, modules);
@@ -253,7 +292,7 @@ export class UserConfig {
 	// 		iframe: this.iframeWrapperMoveState,
 	// 	};
 	// }
-	// 获取当前block组件选中元素，多个元素选中可以为数组；
+  // 获取当前block组件选中元素，多个元素选中可以为数组；
 	getFocusState() {
 		return this.focusState;
 	}
@@ -265,18 +304,19 @@ export class UserConfig {
 	// }
 	// getEventCenter() {
 	// 	return this.eventCenter;
-	// }
-	// getStoreChanger() {
-	// 	return this.storeChanger;
-	// }
+  // }
+
+	getStoreChanger() {
+		return this.storeChanger;
+	}
 	getConfig() {
 		return this.initConfig;
-	}
-	// 获取当前store 仓库实例
+  }
+  // 获取当前store 仓库实例
 	getStore() {
 		return this.store;
-	}
-	// 获取注册组件实例
+  }
+  // 获取注册组件实例
 	getComponentRegister() {
 		return this.componentRegister;
 	}
